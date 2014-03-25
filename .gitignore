@@ -1,0 +1,5 @@
+target/maven-archiver
+target/surefire-reports
+target/maven-archiver
+target/classes
+target/test-classes
