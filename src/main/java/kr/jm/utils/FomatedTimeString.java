@@ -13,11 +13,11 @@ public class FomatedTimeString {
 	public static final String SHORT_FORMAT_WITH_TIMEZONE = "yyyyMMddHHmmssz"; //20140321183123KST
 	public static final String SHORT_FORMAT_WITHOUT_TIMEZONE = "yyyyMMddHHmm"; //201403211831
 	 
-	private static final int aSecond = 1000;
-	private static final int aMinute = 60 * aSecond;
-	private static final int aHour = 60 * aMinute;
-	private static final int aDay = 24 * aHour;
-	private static final int aWeek = 7 * aDay;
+	private static final long aSecond = 1000;
+	private static final long aMinute = 60 * aSecond;
+	private static final long aHour = 60 * aMinute;
+	private static final long aDay = 24 * aHour;
+	private static final long aWeek = 7 * aDay;
 
 	public static String getTimeInUTC(long timestemp, String timeFormat) {
 		return getTime(timestemp, timeFormat, "UTC");
