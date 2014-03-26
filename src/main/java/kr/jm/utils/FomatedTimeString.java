@@ -31,11 +31,11 @@ public class FomatedTimeString {
 		return timeformat.format(ts);
 	}
 
-	public static long getTimestampMinusParemeters(long baseTimestemp,
+	public static long getTimestampMinusParemeters(long beforeTimestemp,
 			int numOfWeeks, int numOfDays, int numOfHours, int numOfMinutes, int numOfSeconds) {
 		long sumOfParemeters = numOfWeeks * aWeek + numOfDays * aDay + numOfHours * aHour
 				+ numOfMinutes * aMinute + numOfSeconds * aSecond;
-		return baseTimestemp - sumOfParemeters;
+		return beforeTimestemp - sumOfParemeters;
 	}
 	
 	public static long getCurrentTimestampMinusParemeters(int numOfWeeks, int numOfDays, int numOfHours,
@@ -43,24 +43,24 @@ public class FomatedTimeString {
 		return getTimestampMinusParemeters(System.currentTimeMillis(), numOfWeeks, numOfDays, numOfHours, numOfMinutes, numOfSeconds);
 	}
 	
-	public static long getTimestampMinusSeconds(long baseTimestemp, int numOfSeconds) {
-		return baseTimestemp - numOfSeconds * aSecond;
+	public static long getTimestampMinusSeconds(long beforeTimestemp, int numOfSeconds) {
+		return beforeTimestemp - numOfSeconds * aSecond;
 	}
 	
-	public static long getTimestampMinusMinutes(long baseTimestemp, int numOfMinutes) {
-		return baseTimestemp - numOfMinutes * aMinute;
+	public static long getTimestampMinusMinutes(long beforeTimestemp, int numOfMinutes) {
+		return beforeTimestemp - numOfMinutes * aMinute;
 	}
 	
-	public static long getTimestampMinusHours(long baseTimestemp, int numOfHours) {
-		return baseTimestemp - numOfHours * aHour;
+	public static long getTimestampMinusHours(long beforeTimestemp, int numOfHours) {
+		return beforeTimestemp - numOfHours * aHour;
 	}
 	
-	public static long getTimestampMinusDays(long baseTimestemp, int numOfDays) {
-		return baseTimestemp - numOfDays * aDay;
+	public static long getTimestampMinusDays(long beforeTimestemp, int numOfDays) {
+		return beforeTimestemp - numOfDays * aDay;
 	}
 	
-	public static long getTimestampMinusWeeks(long baseTimestemp, int numOfWeeks) {
-		return baseTimestemp - numOfWeeks * aWeek;
+	public static long getTimestampMinusWeeks(long beforeTimestemp, int numOfWeeks) {
+		return beforeTimestemp - numOfWeeks * aWeek;
 	}	
 
 }
