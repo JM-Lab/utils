@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class CollectionStringPrinter {
+public class CollectionPrinter {
 
 	static public String CollectionToJSONString(List list) {
 		if (list == null || list.size() == 0) {

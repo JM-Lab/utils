@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kr.jm.utils.CollectionStringPrinter;
+import kr.jm.utils.CollectionPrinter;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class CollectionStringPrinterTest {
 		testList.add("");
 		
 		
-		String listResult = CollectionStringPrinter.CollectionToJSONString(testList);
+		String listResult = CollectionPrinter.CollectionToJSONString(testList);
 		
 		System.out.println(listResult);
 		
@@ -44,7 +44,7 @@ public class CollectionStringPrinterTest {
 		testMap.put(Double.MAX_VALUE, null);
 		testMap.put(Double.MIN_VALUE, null);
 		
-		String mapResult = CollectionStringPrinter.CollectionToJSONString(testMap);
+		String mapResult = CollectionPrinter.CollectionToJSONString(testMap);
 		
 		System.out.println(mapResult);		
 		
