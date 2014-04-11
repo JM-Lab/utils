@@ -15,8 +15,8 @@ public class FomatedTimeString {
 	 
 	private static final long aSecond = 1000;
 	private static final long aMinute = 60 * aSecond;
-	private static final long aHour = 60 * aMinute;
-	private static final long aDay = 24 * aHour;
+	private static final long anHour = 60 * aMinute;
+	private static final long aDay = 24 * anHour;
 	private static final long aWeek = 7 * aDay;
 
 	public static String getTimeInUTC(long timestemp, String timeFormat) {
@@ -33,7 +33,7 @@ public class FomatedTimeString {
 
 	public static long getTimestampMinusParemeters(long beforeTimestemp,
 			int numOfWeeks, int numOfDays, int numOfHours, int numOfMinutes, int numOfSeconds) {
-		long sumOfParemeters = numOfWeeks * aWeek + numOfDays * aDay + numOfHours * aHour
+		long sumOfParemeters = numOfWeeks * aWeek + numOfDays * aDay + numOfHours * anHour
 				+ numOfMinutes * aMinute + numOfSeconds * aSecond;
 		return beforeTimestemp - sumOfParemeters;
 	}
@@ -52,7 +52,7 @@ public class FomatedTimeString {
 	}
 	
 	public static long getTimestampMinusHours(long beforeTimestemp, int numOfHours) {
-		return beforeTimestemp - numOfHours * aHour;
+		return beforeTimestemp - numOfHours * anHour;
 	}
 	
 	public static long getTimestampMinusDays(long beforeTimestemp, int numOfDays) {
