@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kr.jm.utils.CollectionPrinter;
-
 import org.junit.Test;
 
 public class CollectionStringPrinterTest {
-	
+
 	@Test
 	public void testCollectionToJSONString() {
-		
+
 		List testList = new ArrayList();
 		testList.add("test");
 		testList.add(12);
@@ -24,14 +22,13 @@ public class CollectionStringPrinterTest {
 		testList.add(new HashMap());
 		testList.add(null);
 		testList.add("");
-		
-		
+
 		String listResult = CollectionPrinter.CollectionToJSONString(testList);
-		
+
 		System.out.println(listResult);
-		
+
 		System.out.println(testList);
-		
+
 		Map testMap = new HashMap();
 		testMap.put("test", "stringtest");
 		testMap.put(2341, testList);
@@ -43,11 +40,11 @@ public class CollectionStringPrinterTest {
 		testMap.put(Double.MIN_EXPONENT, null);
 		testMap.put(Double.MAX_VALUE, null);
 		testMap.put(Double.MIN_VALUE, null);
-		
+
 		String mapResult = CollectionPrinter.CollectionToJSONString(testMap);
-		
-		System.out.println(mapResult);		
-		
+
+		System.out.println(mapResult);
+
 		System.out.println(testMap);
 	}
 
