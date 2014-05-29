@@ -1,4 +1,4 @@
-package kr.jm.utils;
+package kr.jm.utils.data;
 
 public class JMTime {
 	private int year;

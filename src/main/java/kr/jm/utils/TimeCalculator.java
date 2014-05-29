@@ -1,12 +1,14 @@
 package kr.jm.utils;
 
+import kr.jm.utils.enums.Milliseconds;
+
 public class TimeCalculator {
 
-	public static final long aSecond = 1000;
-	public static final long aMinute = 60 * aSecond;
-	public static final long anHour = 60 * aMinute;
-	public static final long aDay = 24 * anHour;
-	public static final long aWeek = 7 * aDay;
+	private static final long aSecond = Milliseconds.SECOND.getValue();
+	private static final long aMinute = Milliseconds.MINUTE.getValue();
+	private static final long anHour = Milliseconds.HOUR.getValue();
+	private static final long aDay = Milliseconds.DAY.getValue();
+	private static final long aWeek = Milliseconds.WEEK.getValue();
 
 	public static long getTimestampMinusTimes(long targetTimestamp, long times) {
 		return targetTimestamp - times;
