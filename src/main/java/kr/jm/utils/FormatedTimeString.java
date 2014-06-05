@@ -1,7 +1,6 @@
 package kr.jm.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.TimeZone;
 
 import kr.jm.utils.data.JMTime;
@@ -15,18 +14,16 @@ public class FormatedTimeString {
 	public static final String SHORT_FORMAT_WITH_TIMEZONE = "yyyyMMddHHmmssz"; // 20140321183123KST
 	public static final String SHORT_FORMAT_WITHOUT_TIMEZONE = "yyyyMMddHHmm"; // 201403211831
 
-	public static String getTimeInUTC(long timestamp, String timeFormat) {
-		return getTime(timestamp, timeFormat, "UTC");
+	public static String getTimeInUTC(long timestampInUtc, String timeFormat) {
+		return getTime(timestampInUtc, timeFormat, "UTC");
 	}
 
-	public static String getTime(long timestamp, String timeFormat,
+	public static String getTime(long timestampInUtc, String timeFormat,
 			String idOfTimeZone) {
 		SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
 		sdf.setTimeZone(TimeZone.getTimeZone(idOfTimeZone));
-		return sdf.format(timestamp);
+		return sdf.format(timestampInUtc);
 	}
-
-	private static Calendar calendar = Calendar.getInstance();
 
 	public static String getYearyyyy(long timestamp) {
 		return new SimpleDateFormat("yyyy").format(timestamp);
