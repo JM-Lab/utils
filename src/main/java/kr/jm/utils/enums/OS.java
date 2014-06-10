@@ -44,10 +44,10 @@ public enum OS {
 	}
 
 	public static OS getOs() {
-		String os = getOsName();
-		if (os.toLowerCase().contains("windows")) {
+		String os = getOsName().toLowerCase();
+		if (os.contains("windows")) {
 			return WINDOWS;
-		} else if (os.toLowerCase().contains("mac")) {
+		} else if (os.contains("mac")) {
 			return MAC;
 		} else {
 			return LINUX;
