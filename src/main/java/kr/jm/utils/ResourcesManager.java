@@ -27,6 +27,7 @@ public class ResourcesManager {
 		}
 	}
 	
+//	can't instantiate java.io.File object from file in jar 
 	public static File getResourceFile(String pathInClassPath) {
 		return new File(getResourceURI(pathInClassPath));
 	}
