@@ -42,7 +42,7 @@ public class JsonHelper {
 	public static <T> T fromJsonString(String jsonString, Class<T> c){		
 		return gson.fromJson(jsonString, c);
 	}
-	
+	//JsonHelper.fromJsonFile(jsonFile,	new TypeToken<Map<String, Map<String, ComputeVO>>>() {});
 	public static <T> T fromJsonFile(File jsonFile, TypeToken<T> typeToken){
 		return gson.fromJson(FileIO.readString(jsonFile), typeToken.getType());
 	}
