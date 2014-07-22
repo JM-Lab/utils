@@ -17,7 +17,7 @@ public class FormatedTimeString {
 	public static String getTimeInUTC(long timestampInUtc, String timeFormat) {
 		return getTime(timestampInUtc, timeFormat, "UTC");
 	}
-	
+
 	public static String getTime(long timestampInUtc, String timeFormat) {
 		SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
 		sdf.setTimeZone(TimeZone.getDefault());

@@ -32,7 +32,7 @@ public class AutoStringBuilder {
 		sb = sb.delete(sb.length() - autoAppendingString.length(), sb.length());
 		return this;
 	}
-	
+
 	public String autoToString() {
 		return removeLastAutoAppendingString().toString();
 	}

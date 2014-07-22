@@ -11,8 +11,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class HttpGetRequester {
-	
-	public static String getResponseAsString(String url){
+
+	public static String getResponseAsString(String url) {
 		String response = null;
 		try {
 			response = getResponseAsStringThrowsEx(url);
@@ -22,19 +22,23 @@ public class HttpGetRequester {
 		}
 		return response;
 	}
-	
-	private static String getResponseAsStringThrowsEx(String url) throws IOException{
+
+	private static String getResponseAsStringThrowsEx(String url)
+			throws IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(url);
 		CloseableHttpResponse response = httpClient.execute(httpGet);
 		String responseString = null;
-		try {			
+		try {
 			HttpEntity entity = response.getEntity();
 			if (response.getStatusLine().getStatusCode() != 200) {
-                throw new IllegalStateException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-            } else {
-            	responseString = IOUtils.toString(entity.getContent());
-            }
+				throw new IllegalStateException(response.getStatusLine()
+						.getStatusCode()
+						+ " "
+						+ response.getStatusLine().getReasonPhrase());
+			} else {
+				responseString = IOUtils.toString(entity.getContent());
+			}
 			EntityUtils.consume(entity);
 		} finally {
 			response.close();

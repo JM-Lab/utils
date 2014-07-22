@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.Properties;
 
 public class ResourcesManager {
-	
+
 	public static URL getResourceURL(String pathInClassPath) {
 		return ClassLoader.getSystemResource(pathInClassPath);
 	}
@@ -26,8 +26,8 @@ public class ResourcesManager {
 			return null;
 		}
 	}
-	
-//	can't instantiate java.io.File object from file in jar 
+
+	// can't instantiate java.io.File object from file in jar
 	public static File getResourceFile(String pathInClassPath) {
 		return new File(getResourceURI(pathInClassPath));
 	}
@@ -49,7 +49,8 @@ public class ResourcesManager {
 	public static Properties getProperties(File propertiesFile) {
 		Properties properties = new Properties();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(propertiesFile));
+			BufferedReader reader = new BufferedReader(new FileReader(
+					propertiesFile));
 			properties.load(reader);
 			reader.close();
 		} catch (IOException e) {
