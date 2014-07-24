@@ -7,15 +7,26 @@ public class LogHelper {
 		log.info(methodName + "()");
 	}
 
-	static public void logMethodStartInfoWithParams(Logger log,
+	static public void logMethodStartInfo(Logger log, String methodName,
+			Object... params) {
+		log.info(buildMethodLogString(methodName, params));
+	}
+
+	static public void logExeption(Logger log, Exception exeption,
 			String methodName, Object... params) {
-		StringBuilder logStringBuilder = new StringBuilder();
-		logStringBuilder.append(methodName).append("(");
+		log.error(buildMethodLogString(methodName, params), exeption);
+	}
+
+	private static String buildMethodLogString(String methodName,
+			Object... params) {
+		AutoStringBuilder logASB = new AutoStringBuilder(", ");
+		logASB.getStringBuilder().append(methodName).append("(");
 		for (Object param : params) {
-			logStringBuilder.append(param.toString());
-			logStringBuilder.append(", ");
+			if (param == null) logASB.append("null");
+			else logASB.append(param.toString());
 		}
-		log.info(logStringBuilder.substring(0, logStringBuilder.length() - 2)
-				+ ")");
+		String finalLogString = logASB.removeLastAutoAppendingString()
+				.getStringBuilder().append(")").toString();
+		return finalLogString;
 	}
 }
