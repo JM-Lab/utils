@@ -57,7 +57,7 @@ public enum OS {
 	public boolean open(File file) {
 		switch (this) {
 		case WINDOWS:
-			return open("start ", file);
+			return open("cmd /c ", file);
 		case MAC:
 			return open("open ", file);
 		default:
