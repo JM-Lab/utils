@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import kr.jm.utils.LogHelper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -22,8 +22,10 @@ public class LogHelper {
 		AutoStringBuilder logASB = new AutoStringBuilder(", ");
 		logASB.getStringBuilder().append(methodName).append("(");
 		for (Object param : params) {
-			if (param == null) logASB.append("null");
-			else logASB.append(param.toString());
+			if (param == null)
+				logASB.append("null");
+			else
+				logASB.append(param.toString());
 		}
 		String finalLogString = logASB.removeLastAutoAppendingString()
 				.getStringBuilder().append(")").toString();
