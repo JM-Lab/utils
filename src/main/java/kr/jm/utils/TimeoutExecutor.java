@@ -10,19 +10,27 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class TimeoutExecutor {
+	public static void run(ExecutorService threadPool, final Runnable runnableWork, final long timeoutInSec) {
+		threadPool.execute(runnableWork);
+		afterTimeout(timeoutInSec, threadPool);
+	}
 
 	public static void run(final Runnable runnableWork, final long timeoutInSec) {
 		final ExecutorService threadPool = Executors.newFixedThreadPool(2);
-		threadPool.execute(runnableWork);
+		run(threadPool, runnableWork, timeoutInSec);
+	}
+	
+	public static <T> Future<T> run(ExecutorService threadPool, final Callable<T> callableWork,
+			final long timeoutInSec) {
+		Future<T> future = threadPool.submit(callableWork);
 		afterTimeout(timeoutInSec, threadPool);
+		return future;
 	}
 
 	public static <T> Future<T> run(final Callable<T> callableWork,
 			final long timeoutInSec) {
 		final ExecutorService threadPool = Executors.newFixedThreadPool(2);
-		Future<T> future = threadPool.submit(callableWork);
-		afterTimeout(timeoutInSec, threadPool);
-		return future;
+		return run(threadPool, callableWork, timeoutInSec);
 	}
 
 	private static void afterTimeout(final long timeoutInSec,
