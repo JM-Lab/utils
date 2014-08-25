@@ -9,20 +9,20 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class CollectionHelper {
-	public static boolean isListNullOrEmpty(Collection<?> collection) {
+	public static boolean isNullOrEmpty(Collection<?> collection) {
 		return (collection == null || collection.size() == 0) ? true : false;
 	}
 	
-	public static <V> boolean isListNullOrEmpty(V[] array) {
+	public static <V> boolean isNullOrEmpty(V[] array) {
 		return (array == null || array.length == 0) ? true : false;
 	}
 
 	public static <V> V getLast(List<V> list) {
-		return isListNullOrEmpty(list) ? null : list.get(list.size() - 1);
+		return isNullOrEmpty(list) ? null : list.get(list.size() - 1);
 	}
 	
 	public static <V> V getLast(V[] array) {
-		return isListNullOrEmpty(array) ? null : array[array.length - 1];
+		return isNullOrEmpty(array) ? null : array[array.length - 1];
 	}
 
 	public static <V extends Comparable<V>> List<V> sort(List<V> list) {
@@ -47,7 +47,7 @@ public class CollectionHelper {
 		return array;
 	}
 	
-	public static <K, V> Map<K, V> sortedMap(Map<K, V> map,
+	public static <K, V> Map<K, V> sort(Map<K, V> map,
 			Comparator<? super K> comparator) {
 		TreeMap<K, V> sortedMap = new TreeMap<K, V>(comparator);
 		sortedMap.putAll(map);
