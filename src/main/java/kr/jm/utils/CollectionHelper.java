@@ -12,7 +12,7 @@ public class CollectionHelper {
 	public static boolean isNullOrEmpty(Collection<?> collection) {
 		return (collection == null || collection.size() == 0) ? true : false;
 	}
-	
+
 	public static <V> boolean isNullOrEmpty(V[] array) {
 		return (array == null || array.length == 0) ? true : false;
 	}
@@ -20,7 +20,7 @@ public class CollectionHelper {
 	public static <V> V getLast(List<V> list) {
 		return isNullOrEmpty(list) ? null : list.get(list.size() - 1);
 	}
-	
+
 	public static <V> V getLast(V[] array) {
 		return isNullOrEmpty(array) ? null : array[array.length - 1];
 	}
@@ -29,7 +29,7 @@ public class CollectionHelper {
 		Collections.sort(list);
 		return list;
 	}
-	
+
 	public static <V extends Comparable<V>> V[] sort(V[] array) {
 		Arrays.sort(array);
 		return array;
@@ -40,13 +40,12 @@ public class CollectionHelper {
 		Collections.sort(list, comparator);
 		return list;
 	}
-	
-	public static <V> V[] sort(V[] array,
-			Comparator<? super V> comparator) {
+
+	public static <V> V[] sort(V[] array, Comparator<? super V> comparator) {
 		Arrays.sort(array, comparator);
 		return array;
 	}
-	
+
 	public static <K, V> Map<K, V> sort(Map<K, V> map,
 			Comparator<? super K> comparator) {
 		TreeMap<K, V> sortedMap = new TreeMap<K, V>(comparator);

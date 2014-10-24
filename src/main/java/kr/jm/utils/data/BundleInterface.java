@@ -4,7 +4,8 @@ import java.util.List;
 
 import kr.jm.utils.spring.DestroyInterface;
 
-public interface BundleInterface<T extends DestroyInterface> extends DestroyInterface{
+public interface BundleInterface<T extends DestroyInterface> extends
+		DestroyInterface {
 
 	public abstract T getTarget(String targetId);
 

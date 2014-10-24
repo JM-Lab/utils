@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 public class LogHelper {
 	static public void logMethodStartInfo(Logger log, String methodName) {
-		log.info(methodName + "()");
+		log.info(buildMethodLogString(methodName));
 	}
 
 	static public void logMethodStartInfo(Logger log, String methodName,
@@ -13,8 +13,17 @@ public class LogHelper {
 	}
 
 	static public void logExeption(Logger log, Exception exeption,
+			String methodName) {
+		log.error(buildMethodLogString(methodName), exeption);
+	}
+
+	static public void logExeption(Logger log, Exception exeption,
 			String methodName, Object... params) {
 		log.error(buildMethodLogString(methodName, params), exeption);
+	}
+
+	private static String buildMethodLogString(String methodName) {
+		return methodName + "()";
 	}
 
 	private static String buildMethodLogString(String methodName,
