@@ -1,4 +1,4 @@
-package kr.jm.utils.data;
+package kr.jm.utils.bundle;
 
 import java.util.List;
 

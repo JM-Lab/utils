@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jmlab</groupId>
 	<artifactId>jmlab-utils</artifactId>
-	<version>0.2.2</version>
+	<version>0.2.5</version>
 	<name>JMLab-Utils</name>
 	<description>Java Utility Libraries</description>
 	<url>https://github.com/JM-Lab/utils</url>
@@ -49,6 +49,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.14.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.5</version>
 		</dependency>
 	</dependencies>
 </project>

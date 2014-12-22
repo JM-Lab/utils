@@ -1,5 +1,7 @@
 JMLab Java Utility Libraries
 ============================
+## version
+	0.2.5
 
 ## Installation
 
@@ -16,6 +18,6 @@ Set up pom.xml :
     <dependency>
 			<groupId>jmlab</groupId>
 			<artifactId>jmlab-utils</artifactId>
-			<version>0.1.86</version>
+			<version>0.2.5</version>
 	</dependency>
     (...)

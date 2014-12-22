@@ -1,12 +1,12 @@
-package kr.jm.utils;
+package kr.jm.utils.time;
 
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import kr.jm.utils.data.JMTime;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
-public class FormatedTimeString {
-
+public class JMTimeUtil {
 	public static final String LONG_FORMAT_WITH_PLUS_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ssZ"; // 2014-03-21T18:31:23+0900
 	public static final String LONG_FORMAT_WITH_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ssz"; // 2014-03-21T18:31:23KST
 	public static final String LONG_FORMAT_WITHOUT_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss"; // 2014-03-21T18:31:23
@@ -14,14 +14,41 @@ public class FormatedTimeString {
 	public static final String SHORT_FORMAT_WITH_TIMEZONE = "yyyyMMddHHmmssz"; // 20140321183123KST
 	public static final String SHORT_FORMAT_WITHOUT_TIMEZONE = "yyyyMMddHHmm"; // 201403211831
 
+	public static String getTime(long timestampInUtc) {
+		return getTimeAsLongFormatWithTimezone(timestampInUtc);
+	}
+
+	public static String getTimeAsLongFormatWithPlusTimezone(long timestampInUtc) {
+		return getTime(timestampInUtc, LONG_FORMAT_WITH_PLUS_TIMEZONE);
+	}
+
+	public static String getTimeAsLongFormatWithTimezone(long timestampInUtc) {
+		return getTime(timestampInUtc, LONG_FORMAT_WITH_TIMEZONE);
+	}
+
+	public static String getTimeAsLongFormatWithoutTimezone(long timestampInUtc) {
+		return getTime(timestampInUtc, LONG_FORMAT_WITHOUT_TIMEZONE);
+	}
+
+	public static String getTimeAsShortFormatWithPlusTimezone(
+			long timestampInUtc) {
+		return getTime(timestampInUtc, SHORT_FORMAT_WITH_PLUS_TIMEZONE);
+	}
+
+	public static String getTimeAsShortFormatWithTimezone(long timestampInUtc) {
+		return getTime(timestampInUtc, SHORT_FORMAT_WITH_TIMEZONE);
+	}
+
+	public static String getTimeAsShortFormatWithoutTimezone(long timestampInUtc) {
+		return getTime(timestampInUtc, SHORT_FORMAT_WITHOUT_TIMEZONE);
+	}
+
 	public static String getTimeInUTC(long timestampInUtc, String timeFormat) {
 		return getTime(timestampInUtc, timeFormat, "UTC");
 	}
 
 	public static String getTime(long timestampInUtc, String timeFormat) {
-		SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
-		sdf.setTimeZone(TimeZone.getDefault());
-		return sdf.format(timestampInUtc);
+		return new SimpleDateFormat(timeFormat).format(timestampInUtc);
 	}
 
 	public static String getTime(long timestampInUtc, String timeFormat,
@@ -29,6 +56,13 @@ public class FormatedTimeString {
 		SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
 		sdf.setTimeZone(TimeZone.getTimeZone(idOfTimeZone));
 		return sdf.format(timestampInUtc);
+	}
+
+	public static String changeFormatAndTimeZone(String isoTimestampString,
+			String dateFormatString, String timeZoneId) {
+		return new SimpleDateFormat(dateFormatString).format(new DateTime(
+				isoTimestampString, DateTimeZone.forTimeZone(TimeZone
+						.getTimeZone(timeZoneId))).getMillis());
 	}
 
 	public static String getYearyyyy(long timestamp) {
@@ -122,12 +156,4 @@ public class FormatedTimeString {
 	public static String getTimeZoneZ(long timestamp) {
 		return new SimpleDateFormat("Z").format(timestamp);
 	}
-
-	public static JMTime getTime(long timestamp) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-		String[] timeStrings = sdf.format(timestamp).split("-");
-		return new JMTime(timeStrings[0], timeStrings[1], timeStrings[2],
-				timeStrings[3], timeStrings[4], timeStrings[5]);
-	}
-
 }

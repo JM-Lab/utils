@@ -2,6 +2,8 @@ package kr.jm.utils;
 
 import java.io.IOException;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,6 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+@Slf4j
 public class HttpGetRequester {
 
 	public static String getResponseAsString(String url) {
@@ -17,7 +20,7 @@ public class HttpGetRequester {
 		try {
 			response = getResponseAsStringThrowsEx(url);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogHelper.logExeption(log, e, "getResponseAsString");
 			return null;
 		}
 		return response;
