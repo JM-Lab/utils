@@ -1,7 +1,5 @@
 package kr.jm.utils;
 
-import java.io.IOException;
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
@@ -12,22 +10,33 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 @Slf4j
 public class HttpGetRequester {
 
-	public static String getResponseAsString(String url) {
-		String response = null;
+	public static <T> T getRestApiResponseAsObject(String url,
+			TypeReference<T> typeReference) {
 		try {
-			response = getResponseAsStringThrowsEx(url);
-		} catch (IOException e) {
+			return JsonHelper.fromJsonString(getResponseAsStringThrowsEx(url),
+					typeReference);
+		} catch (Exception e) {
+			LogHelper.logExeption(log, e, "getRestApiResponseAsObject");
+			return null;
+		}
+	}
+
+	public static String getResponseAsString(String url) {
+		try {
+			return getResponseAsStringThrowsEx(url);
+		} catch (Exception e) {
 			LogHelper.logExeption(log, e, "getResponseAsString");
 			return null;
 		}
-		return response;
 	}
 
 	private static String getResponseAsStringThrowsEx(String url)
-			throws IOException {
+			throws Exception {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(url);
 		CloseableHttpResponse response = httpClient.execute(httpGet);
