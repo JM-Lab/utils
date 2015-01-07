@@ -1,8 +1,8 @@
-package kr.jm.utils;
+package kr.jm.utils.time;
 
 import kr.jm.utils.enums.Milliseconds;
 
-public class TimeCalculator {
+public class JMTimeCalculator {
 
 	private static final long aSecond = Milliseconds.SECOND.getValue();
 	private static final long aMinute = Milliseconds.MINUTE.getValue();

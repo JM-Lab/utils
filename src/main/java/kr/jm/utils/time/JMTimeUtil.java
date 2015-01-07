@@ -3,19 +3,23 @@ package kr.jm.utils.time;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+import org.joda.time.format.ISODateTimeFormat;
 
 public class JMTimeUtil {
-	public static final String LONG_FORMAT_WITH_PLUS_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ssZ"; // 2014-03-21T18:31:23+0900
-	public static final String LONG_FORMAT_WITH_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ssz"; // 2014-03-21T18:31:23KST
-	public static final String LONG_FORMAT_WITHOUT_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss"; // 2014-03-21T18:31:23
-	public static final String SHORT_FORMAT_WITH_PLUS_TIMEZONE = "yyyyMMddHHmmssZ"; // 20140321183123+0900
-	public static final String SHORT_FORMAT_WITH_TIMEZONE = "yyyyMMddHHmmssz"; // 20140321183123KST
-	public static final String SHORT_FORMAT_WITHOUT_TIMEZONE = "yyyyMMddHHmm"; // 201403211831
+	public static final String LONG_FORMAT_WITH_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; // 2014-03-21T18:31:23.000Z
+	public static final String LONG_FORMAT_WITH_PLUS_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; // 2014-03-21T18:31:23.000+0900
+	public static final String LONG_FORMAT_WITH_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSz"; // 2014-03-21T18:31:23.000KST
+	public static final String LONG_FORMAT_WITHOUT_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSS"; // 2014-03-21T18:31:23.000
+	public static final String SHORT_FORMAT_WITH_PLUS_TIMEZONE = "yyyyMMddHHmmss.SSSZ"; // 20140321183123.000+0900
+	public static final String SHORT_FORMAT_WITH_TIMEZONE = "yyyyMMddHHmmss.SSSz"; // 20140321183123.000KST
+	public static final String SHORT_FORMAT_WITHOUT_TIMEZONE = "yyyyMMddHHmm.SSS"; // 201403211831.000
 
 	public static String getTime(long timestampInUtc) {
 		return getTimeAsLongFormatWithTimezone(timestampInUtc);
+	}
+
+	public static String getTimeAsDefaultUtcFormat(long timestampInUtc) {
+		return getTimeInUTC(timestampInUtc, LONG_FORMAT_WITH_Z);
 	}
 
 	public static String getTimeAsLongFormatWithPlusTimezone(long timestampInUtc) {
@@ -60,9 +64,13 @@ public class JMTimeUtil {
 
 	public static String changeFormatAndTimeZone(String isoTimestampString,
 			String dateFormatString, String timeZoneId) {
-		return new SimpleDateFormat(dateFormatString).format(new DateTime(
-				isoTimestampString, DateTimeZone.forTimeZone(TimeZone
-						.getTimeZone(timeZoneId))).getMillis());
+		return getTime(changeTimestampStringToLong(isoTimestampString),
+				dateFormatString, timeZoneId);
+	}
+
+	public static long changeTimestampStringToLong(String isoTimestampString) {
+		return ISODateTimeFormat.dateTime().parseDateTime(isoTimestampString)
+				.getMillis();
 	}
 
 	public static String getYearyyyy(long timestamp) {
