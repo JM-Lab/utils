@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Slf4j
 public class JsonHelper {
 
-	private static ObjectMapper jsonMapper = new ObjectMapper();
+	private static ObjectMapper jsonMapper = new ObjectMapper()
+			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);;
 
 	public static <D> String toJsonString(D dataObject) {
 		try {
@@ -43,21 +45,29 @@ public class JsonHelper {
 		}
 	}
 
-	public static <T> T fromJsonString(String jsonString,
-			TypeReference<T> typeReference) {
+	public static <T> T fromBytes(byte[] bytes, TypeReference<T> typeReference) {
 		try {
-			return jsonMapper.readValue(jsonString.getBytes(), typeReference);
+			return jsonMapper.readValue(bytes, typeReference);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonString", jsonString);
+			return handleExetion(e, "fromJsonString", new String(bytes));
 		}
 	}
 
-	public static <T> T fromJsonString(String jsonString, Class<T> c) {
+	public static <T> T fromBytes(byte[] bytes, Class<T> c) {
 		try {
-			return jsonMapper.readValue(jsonString.getBytes(), c);
+			return jsonMapper.readValue(bytes, c);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonString", jsonString);
+			return handleExetion(e, "fromJsonString", new String(bytes));
 		}
+	}
+
+	public static <T> T fromJsonString(String jsonString,
+			TypeReference<T> typeReference) {
+		return fromBytes(jsonString.getBytes(), typeReference);
+	}
+
+	public static <T> T fromJsonString(String jsonString, Class<T> c) {
+		return fromBytes(jsonString.getBytes(), c);
 	}
 
 	public static <T> T fromJsonFile(File jsonFile,

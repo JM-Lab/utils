@@ -13,8 +13,8 @@ public class Destroyer {
 		cleanUp(Arrays.asList(destoryList));
 	}
 
-	public static <D extends DestroyInterface> void cleanUp(List<D> destoryList) {
-		for (DestroyInterface destroyTarget : destoryList) {
+	public static <D extends DestroyInterface> void cleanUp(List<D> destroyList) {
+		for (DestroyInterface destroyTarget : destroyList) {
 			try {
 				destroyTarget.cleanUp();
 			} catch (Exception e) {

@@ -11,6 +11,14 @@ public class AutoStringBuilder {
 		sb = new StringBuilder();
 	}
 
+	public AutoStringBuilder appendOnlyNotNullAndEmpty(
+			Object... appendingObjects) {
+		for (Object object : appendingObjects)
+			if (object != null && !"".equals(object))
+				this.append(object.toString());
+		return this;
+	}
+
 	public AutoStringBuilder append(String string) {
 		sb.append(string).append(autoAppendingString);
 		return this;

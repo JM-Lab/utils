@@ -12,7 +12,7 @@ public class JMExceptionManager {
 	private static final String ERROR_HISTORY_SIZE = "error.history.size";
 	static {
 		if (!System.getProperties().containsKey(ERROR_HISTORY_SIZE))
-			System.setProperty(ERROR_HISTORY_SIZE, "100");
+			System.setProperty(ERROR_HISTORY_SIZE, "1000");
 	}
 	private static final int maxQueueSize = new Integer(System.getProperties()
 			.get(ERROR_HISTORY_SIZE).toString());
@@ -41,7 +41,7 @@ public class JMExceptionManager {
 		if (errorMessageHistoryList.size() >= maxQueueSize)
 			errorMessageHistoryList.remove(0);
 		errorMessageHistoryList.add(new ErrorMessageHistory(System
-				.currentTimeMillis(), e.getMessage()));
+				.currentTimeMillis(), e.toString()));
 	}
 
 	public static List<ErrorMessageHistory> getErrorMessageHistoryList() {

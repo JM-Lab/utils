@@ -52,4 +52,30 @@ public class CollectionHelper {
 		sortedMap.putAll(map);
 		return sortedMap;
 	}
+
+	public static <K, V> Map<K, V> sort(Map<K, V> map) {
+		TreeMap<K, V> sortedMap = new TreeMap<K, V>();
+		sortedMap.putAll(map);
+		return sortedMap;
+	}
+
+	public static <K, V> V getValueOrNew(Map<K, V> map, K key, V newValue) {
+		synchronized (map) {
+			V value = map.get(key);
+			if (value == null) {
+				value = newValue;
+				map.put(key, value);
+			}
+			return value;
+		}
+	}
+
+	public static <K, V> V getValueOrNew(Map<K, V> map, K key,
+			NewValueBuilder<V> newValueBuilder) {
+		return getValueOrNew(map, key, newValueBuilder.buildNewValue());
+	}
+
+	public interface NewValueBuilder<V> {
+		public V buildNewValue();
+	}
 }

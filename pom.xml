@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jmlab</groupId>
 	<artifactId>jmlab-utils</artifactId>
-	<version>0.2.5</version>
+	<version>0.2.6</version>
 	<name>JMLab-Utils</name>
 	<description>Java Utility Libraries</description>
 	<url>https://github.com/JM-Lab/utils</url>
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.3</version>
+			<version>4.3.5</version>
 		</dependency>
 
 		<dependency>
@@ -56,6 +56,12 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>4.0.6.RELEASE</version>
 		</dependency>
 	</dependencies>
 </project>
