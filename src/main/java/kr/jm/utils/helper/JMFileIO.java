@@ -1,4 +1,4 @@
-package kr.jm.utils;
+package kr.jm.utils.helper;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-public class FileIO {
+public class JMFileIO {
 
 	public static boolean writeString(String inputString, File targetfile) {
 		if (targetfile.exists()) {

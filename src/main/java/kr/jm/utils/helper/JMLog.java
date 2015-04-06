@@ -1,10 +1,13 @@
-package kr.jm.utils;
+package kr.jm.utils.helper;
 
 import java.util.Collection;
 
+import kr.jm.utils.AutoStringBuilder;
+
 import org.slf4j.Logger;
 
-public class LogHelper {
+public class JMLog {
+
 	static public void logMethodStartInfo(Logger log, String methodName) {
 		log.info(buildMethodLogString(methodName));
 	}

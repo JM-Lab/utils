@@ -1,5 +1,7 @@
 package kr.jm.utils;
 
+import kr.jm.utils.helper.JMJson;
+import kr.jm.utils.helper.JMLog;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
@@ -18,10 +20,10 @@ public class HttpGetRequester {
 	public static <T> T getRestApiResponseAsObject(String url,
 			TypeReference<T> typeReference) {
 		try {
-			return JsonHelper.fromJsonString(getResponseAsStringThrowsEx(url),
+			return JMJson.fromJsonString(getResponseAsStringThrowsEx(url),
 					typeReference);
 		} catch (Exception e) {
-			LogHelper.logExeption(log, e, "getRestApiResponseAsObject");
+			JMLog.logExeption(log, e, "getRestApiResponseAsObject");
 			return null;
 		}
 	}
@@ -30,7 +32,7 @@ public class HttpGetRequester {
 		try {
 			return getResponseAsStringThrowsEx(url);
 		} catch (Exception e) {
-			LogHelper.logExeption(log, e, "getResponseAsString");
+			JMLog.logExeption(log, e, "getResponseAsString");
 			return null;
 		}
 	}

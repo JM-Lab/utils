@@ -3,7 +3,7 @@ package kr.jm.utils.spring;
 import java.util.Arrays;
 import java.util.List;
 
-import kr.jm.utils.LogHelper;
+import kr.jm.utils.helper.JMLog;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,7 +18,7 @@ public class Destroyer {
 			try {
 				destroyTarget.cleanUp();
 			} catch (Exception e) {
-				LogHelper.logExeption(log, e, "cleanUp", destroyTarget);
+				JMLog.logExeption(log, e, "cleanUp", destroyTarget);
 				continue;
 			}
 		}

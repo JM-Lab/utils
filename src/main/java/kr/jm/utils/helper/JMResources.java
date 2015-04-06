@@ -1,4 +1,4 @@
-package kr.jm.utils;
+package kr.jm.utils.helper;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
-public class ResourcesManager {
+public class JMResources {
 
 	public static URL getResourceURL(String pathInClassPath) {
 		return ClassLoader.getSystemResource(pathInClassPath);

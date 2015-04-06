@@ -1,6 +1,7 @@
-package kr.jm.utils;
+package kr.jm.utils.helper;
 
 import java.io.File;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Slf4j
-public class JsonHelper {
+public class JMJson {
 
 	private static ObjectMapper jsonMapper = new ObjectMapper()
 			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);;
@@ -24,11 +25,11 @@ public class JsonHelper {
 	}
 
 	public static String toJsonString(File jsonFile) {
-		return FileIO.readString(jsonFile);
+		return JMFileIO.readString(jsonFile);
 	}
 
 	public static String toJsonString(String resourceInClasspath) {
-		return toJsonString(ResourcesManager
+		return toJsonString(JMResources
 				.getResourceFile(resourceInClasspath));
 	}
 
@@ -95,17 +96,17 @@ public class JsonHelper {
 	public static <T> T fromJsonResource(String resourceInClasspath,
 			TypeReference<T> typeReference) {
 		return fromJsonFile(
-				ResourcesManager.getResourceFile(resourceInClasspath),
+				JMResources.getResourceFile(resourceInClasspath),
 				typeReference);
 	}
 
 	public static <T> T fromJsonResource(String resourceInClasspath, Class<T> c) {
 		return fromJsonFile(
-				ResourcesManager.getResourceFile(resourceInClasspath), c);
+				JMResources.getResourceFile(resourceInClasspath), c);
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {
-		LogHelper.logExeption(log, e, method, source);
+		JMLog.logExeption(log, e, method, source);
 		return null;
 	}
 

@@ -3,7 +3,7 @@ package kr.jm.utils.exception;
 import java.util.LinkedList;
 import java.util.List;
 
-import kr.jm.utils.LogHelper;
+import kr.jm.utils.helper.JMLog;
 
 import org.slf4j.Logger;
 
@@ -24,9 +24,9 @@ public class JMExceptionManager {
 	public static void logExption(Logger log, Exception e, String methodName,
 			Object... params) {
 		if (params.length > 0)
-			LogHelper.logExeption(log, e, methodName, params);
+			JMLog.logExeption(log, e, methodName, params);
 		else
-			LogHelper.logExeption(log, e, methodName);
+			JMLog.logExeption(log, e, methodName);
 		recordErrorMessageHistory(e);
 		increaseErrorCount();
 	}

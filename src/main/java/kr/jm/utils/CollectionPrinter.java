@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+@Deprecated
 public class CollectionPrinter {
 
 	static public String CollectionToJSONString(List<?> list) {

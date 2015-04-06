@@ -1,4 +1,4 @@
-package kr.jm.utils;
+package kr.jm.utils.helper;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -6,8 +6,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-@Deprecated
-public class TimeoutExecutor {
+public class JMThread {
+	public static ExecutorService newThreadPool(int numOfThread) {
+		return numOfThread < 1 ? Executors.newCachedThreadPool() : Executors
+				.newFixedThreadPool(numOfThread);
+	}
+
+	public static void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void run(final Runnable runnableWork, final long timeoutInSec) {
 		final ExecutorService threadPool = Executors.newFixedThreadPool(2);
 		afterTimeout(timeoutInSec, threadPool, threadPool.submit(runnableWork));

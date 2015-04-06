@@ -1,4 +1,4 @@
-package kr.jm.utils;
+package kr.jm.utils.helper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class CollectionHelper {
+public class JMCollections {
 	public static boolean isNullOrEmpty(Collection<?> collection) {
 		return (collection == null || collection.size() == 0) ? true : false;
 	}
