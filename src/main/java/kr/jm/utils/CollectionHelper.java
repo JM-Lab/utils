@@ -72,10 +72,27 @@ public class CollectionHelper {
 
 	public static <K, V> V getValueOrNew(Map<K, V> map, K key,
 			NewValueBuilder<V> newValueBuilder) {
-		return getValueOrNew(map, key, newValueBuilder.buildNewValue());
+		synchronized (map) {
+			V value = map.get(key);
+			if (value == null) {
+				value = newValueBuilder.buildNewValue();
+				map.put(key, value);
+			}
+			return value;
+		}
 	}
 
 	public interface NewValueBuilder<V> {
 		public V buildNewValue();
+	}
+
+	public static <E> E[] buildArray(
+			@SuppressWarnings("unchecked") E... objects) {
+		return objects;
+	}
+
+	public static <E> List<E> buildList(
+			@SuppressWarnings("unchecked") E... objects) {
+		return Arrays.asList(objects);
 	}
 }

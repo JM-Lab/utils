@@ -27,6 +27,11 @@ public class JsonHelper {
 		return FileIO.readString(jsonFile);
 	}
 
+	public static String toJsonString(String resourceInClasspath) {
+		return toJsonString(ResourcesManager
+				.getResourceFile(resourceInClasspath));
+	}
+
 	public static File toJsonFile(String jsonString, File returnJsonFile) {
 		try {
 			jsonMapper.writeValue(returnJsonFile, jsonString);
@@ -79,12 +84,24 @@ public class JsonHelper {
 		}
 	}
 
-	public static <T> T fromJsonFile(final File jsonFile, final Class<T> c) {
+	public static <T> T fromJsonFile(File jsonFile, Class<T> c) {
 		try {
 			return jsonMapper.readValue(jsonFile, c);
 		} catch (Exception e) {
 			return handleExetion(e, "fromJsonFile", jsonFile);
 		}
+	}
+
+	public static <T> T fromJsonResource(String resourceInClasspath,
+			TypeReference<T> typeReference) {
+		return fromJsonFile(
+				ResourcesManager.getResourceFile(resourceInClasspath),
+				typeReference);
+	}
+
+	public static <T> T fromJsonResource(String resourceInClasspath, Class<T> c) {
+		return fromJsonFile(
+				ResourcesManager.getResourceFile(resourceInClasspath), c);
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {

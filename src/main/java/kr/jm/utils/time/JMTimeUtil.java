@@ -25,7 +25,7 @@ public class JMTimeUtil {
 	public static String getCurrentTimestamp() {
 		return getTime(System.currentTimeMillis());
 	}
-	
+
 	public static String getCurrentTimestamp(String timeFormat) {
 		return getTimeInUTC(System.currentTimeMillis(), timeFormat);
 	}

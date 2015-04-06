@@ -25,10 +25,8 @@ public class AutoStringBuilder {
 	}
 
 	public AutoStringBuilder append(String... strings) {
-		for (String s : strings) {
-			sb.append(s);
-		}
-		sb.append(autoAppendingString);
+		for (String s : strings)
+			append(s);
 		return this;
 	}
 
