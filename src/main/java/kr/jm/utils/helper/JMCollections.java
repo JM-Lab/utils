@@ -13,26 +13,13 @@ public class JMCollections {
 		return (collection == null || collection.size() == 0) ? true : false;
 	}
 
-	public static <V> boolean isNullOrEmpty(V[] array) {
-		return (array == null || array.length == 0) ? true : false;
-	}
-
 	public static <V> V getLast(List<V> list) {
 		return isNullOrEmpty(list) ? null : list.get(list.size() - 1);
-	}
-
-	public static <V> V getLast(V[] array) {
-		return isNullOrEmpty(array) ? null : array[array.length - 1];
 	}
 
 	public static <V extends Comparable<V>> List<V> sort(List<V> list) {
 		Collections.sort(list);
 		return list;
-	}
-
-	public static <V extends Comparable<V>> V[] sort(V[] array) {
-		Arrays.sort(array);
-		return array;
 	}
 
 	public static <V> List<V> sort(List<V> list,
@@ -86,13 +73,9 @@ public class JMCollections {
 		public V buildNewValue();
 	}
 
-	public static <E> E[] buildArray(
-			@SuppressWarnings("unchecked") E... objects) {
-		return objects;
-	}
-
 	public static <E> List<E> buildList(
 			@SuppressWarnings("unchecked") E... objects) {
 		return Arrays.asList(objects);
 	}
+
 }

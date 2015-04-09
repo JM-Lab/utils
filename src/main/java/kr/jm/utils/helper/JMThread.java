@@ -19,7 +19,7 @@ public class JMThread {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void run(final Runnable runnableWork, final long timeoutInSec) {
 		final ExecutorService threadPool = Executors.newFixedThreadPool(2);
 		afterTimeout(timeoutInSec, threadPool, threadPool.submit(runnableWork));

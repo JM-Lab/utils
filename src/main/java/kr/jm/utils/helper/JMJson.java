@@ -2,7 +2,6 @@ package kr.jm.utils.helper;
 
 import java.io.File;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,8 +28,7 @@ public class JMJson {
 	}
 
 	public static String toJsonString(String resourceInClasspath) {
-		return toJsonString(JMResources
-				.getResourceFile(resourceInClasspath));
+		return toJsonString(JMResources.getResourceFile(resourceInClasspath));
 	}
 
 	public static File toJsonFile(String jsonString, File returnJsonFile) {
@@ -95,14 +93,12 @@ public class JMJson {
 
 	public static <T> T fromJsonResource(String resourceInClasspath,
 			TypeReference<T> typeReference) {
-		return fromJsonFile(
-				JMResources.getResourceFile(resourceInClasspath),
+		return fromJsonFile(JMResources.getResourceFile(resourceInClasspath),
 				typeReference);
 	}
 
 	public static <T> T fromJsonResource(String resourceInClasspath, Class<T> c) {
-		return fromJsonFile(
-				JMResources.getResourceFile(resourceInClasspath), c);
+		return fromJsonFile(JMResources.getResourceFile(resourceInClasspath), c);
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {
