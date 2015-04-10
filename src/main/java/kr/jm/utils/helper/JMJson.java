@@ -1,6 +1,7 @@
 package kr.jm.utils.helper;
 
 import java.io.File;
+import java.io.InputStream;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,7 @@ public class JMJson {
 		return JMFileIO.readString(jsonFile);
 	}
 
+	@Deprecated
 	public static String toJsonString(String resourceInClasspath) {
 		return toJsonString(JMResources.getResourceFile(resourceInClasspath));
 	}
@@ -53,7 +55,7 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(bytes, typeReference);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonString", new String(bytes));
+			return handleExetion(e, "fromBytes", new String(bytes));
 		}
 	}
 
@@ -61,7 +63,7 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(bytes, c);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonString", new String(bytes));
+			return handleExetion(e, "fromBytes", new String(bytes));
 		}
 	}
 
@@ -79,7 +81,7 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(jsonFile, typeReference);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonString", jsonFile);
+			return handleExetion(e, "fromJsonFile", jsonFile);
 		}
 	}
 
@@ -91,14 +93,33 @@ public class JMJson {
 		}
 	}
 
+	public static <T> T fromJsonInputStream(InputStream inputStream,
+			TypeReference<T> typeReference) {
+		try {
+			return jsonMapper.readValue(inputStream, typeReference);
+		} catch (Exception e) {
+			return handleExetion(e, "fromJsonInputStream", inputStream);
+		}
+	}
+
+	public static <T> T fromJsonInputStream(InputStream inputStream, Class<T> c) {
+		try {
+			return jsonMapper.readValue(inputStream, c);
+		} catch (Exception e) {
+			return handleExetion(e, "fromJsonInputStream", inputStream);
+		}
+	}
+
 	public static <T> T fromJsonResource(String resourceInClasspath,
 			TypeReference<T> typeReference) {
-		return fromJsonFile(JMResources.getResourceFile(resourceInClasspath),
+		return fromJsonInputStream(
+				JMResources.getResourceInputStream(resourceInClasspath),
 				typeReference);
 	}
 
 	public static <T> T fromJsonResource(String resourceInClasspath, Class<T> c) {
-		return fromJsonFile(JMResources.getResourceFile(resourceInClasspath), c);
+		return fromJsonInputStream(
+				JMResources.getResourceInputStream(resourceInClasspath), c);
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {

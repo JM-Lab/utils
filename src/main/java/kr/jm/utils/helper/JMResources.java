@@ -28,8 +28,18 @@ public class JMResources {
 	}
 
 	// can't instantiate java.io.File object from file in jar
+	@Deprecated
 	public static File getResourceFile(String pathInClassPath) {
 		return new File(getResourceURI(pathInClassPath));
+	}
+
+	public static InputStream getResourceInputStream(String pathInClassPath) {
+		try {
+			return getResourceURL(pathInClassPath).openStream();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static Properties getProperties(String pathInClassPath) {
