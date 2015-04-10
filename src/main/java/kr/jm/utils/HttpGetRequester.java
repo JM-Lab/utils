@@ -23,7 +23,7 @@ public class HttpGetRequester {
 			return JMJson.fromJsonString(getResponseAsStringThrowsEx(url),
 					typeReference);
 		} catch (Exception e) {
-			JMLog.logExeption(log, e, "getRestApiResponseAsObject");
+			JMLog.logException(log, e, "getRestApiResponseAsObject");
 			return null;
 		}
 	}
@@ -32,7 +32,7 @@ public class HttpGetRequester {
 		try {
 			return getResponseAsStringThrowsEx(url);
 		} catch (Exception e) {
-			JMLog.logExeption(log, e, "getResponseAsString");
+			JMLog.logException(log, e, "getResponseAsString");
 			return null;
 		}
 	}

@@ -18,7 +18,7 @@ public class Destroyer {
 			try {
 				destroyTarget.cleanUp();
 			} catch (Exception e) {
-				JMLog.logExeption(log, e, "cleanUp", destroyTarget);
+				JMLog.logException(log, e, "cleanUp", destroyTarget);
 				continue;
 			}
 		}

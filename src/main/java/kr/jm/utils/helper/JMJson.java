@@ -102,7 +102,7 @@ public class JMJson {
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {
-		JMLog.logExeption(log, e, method, source);
+		JMLog.logException(log, e, method, source);
 		return null;
 	}
 

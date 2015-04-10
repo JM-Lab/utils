@@ -34,12 +34,12 @@ public class JMLog {
 		log.debug(buildMethodLogString(methodName, params));
 	}
 
-	static public void logExeption(Logger log, Exception exeption,
+	static public void logException(Logger log, Exception exeption,
 			String methodName) {
 		log.error(buildMethodLogString(methodName), exeption);
 	}
 
-	static public void logExeption(Logger log, Exception exeption,
+	static public void logException(Logger log, Exception exeption,
 			String methodName, Object... params) {
 		log.error(buildMethodLogString(methodName, params), exeption);
 	}

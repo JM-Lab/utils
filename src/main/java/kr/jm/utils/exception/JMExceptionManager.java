@@ -25,19 +25,19 @@ public class JMExceptionManager {
 
 	private static long errorCount = 0;
 
-	public static void logExption(Logger log, Exception e, String methodName,
+	public static void logException(Logger log, Exception e, String methodName,
 			Object... params) {
 		if (params.length > 0)
-			JMLog.logExeption(log, e, methodName, params);
+			JMLog.logException(log, e, methodName, params);
 		else
-			JMLog.logExeption(log, e, methodName);
+			JMLog.logException(log, e, methodName);
 		recordErrorMessageHistory(e);
 		increaseErrorCount();
 	}
 
-	public static void logExptionAndCount(Logger log, Exception e,
+	public static void logExceptionAndCount(Logger log, Exception e,
 			String methodName, Object... params) {
-		logExption(log, e, methodName, params);
+		logException(log, e, methodName, params);
 		increaseErrorCount();
 	}
 
