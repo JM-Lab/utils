@@ -3,6 +3,7 @@ package kr.jm.utils.helper;
 import java.io.File;
 import java.io.InputStream;
 
+import kr.jm.utils.exception.JMExceptionManager;
 import lombok.extern.slf4j.Slf4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -123,7 +124,7 @@ public class JMJson {
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {
-		JMLog.logException(log, e, method, source);
+		JMExceptionManager.logException(log, e, method, source);
 		return null;
 	}
 
