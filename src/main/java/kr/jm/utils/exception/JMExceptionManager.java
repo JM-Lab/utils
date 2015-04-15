@@ -31,14 +31,8 @@ public class JMExceptionManager {
 			JMLog.logException(log, e, methodName, params);
 		else
 			JMLog.logException(log, e, methodName);
+		increaseErrorCount();
 		recordErrorMessageHistory(e);
-		increaseErrorCount();
-	}
-
-	public static void logExceptionAndCount(Logger log, Exception e,
-			String methodName, Object... params) {
-		logException(log, e, methodName, params);
-		increaseErrorCount();
 	}
 
 	private static void recordErrorMessageHistory(Exception e) {
@@ -48,7 +42,7 @@ public class JMExceptionManager {
 				.currentTimeMillis(), getStackTraceString(e)));
 	}
 
-	public static String getStackTraceString(Throwable throwable) {
+	private static String getStackTraceString(Throwable throwable) {
 		AutoStringBuilder stackTraceStringBuilder = new AutoStringBuilder(
 				LINE_SEPARATOR);
 		stackTraceStringBuilder.append(throwable.toString());
@@ -59,6 +53,11 @@ public class JMExceptionManager {
 
 	public static List<ErrorMessageHistory> getErrorMessageHistoryList() {
 		return errorMessageHistoryList;
+	}
+
+	public static void clearAll() {
+		removeErrorMessgeHistoryList();
+		resetErrorCount();
 	}
 
 	public static void removeErrorMessgeHistoryList() {
@@ -73,7 +72,7 @@ public class JMExceptionManager {
 		errorCount = 0;
 	}
 
-	public static void increaseErrorCount() {
+	private static void increaseErrorCount() {
 		errorCount++;
 	}
 
