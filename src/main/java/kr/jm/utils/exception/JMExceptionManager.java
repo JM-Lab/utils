@@ -5,21 +5,22 @@ import java.util.List;
 
 import kr.jm.utils.AutoStringBuilder;
 import kr.jm.utils.helper.JMLog;
+import kr.jm.utils.helper.JMResources;
 
 import org.slf4j.Logger;
 
 public class JMExceptionManager {
 
 	private static final String ERROR_HISTORY_SIZE = "error.history.size";
+
 	static {
-		if (!System.getProperties().containsKey(ERROR_HISTORY_SIZE))
-			System.setProperty(ERROR_HISTORY_SIZE, "1000");
+		JMResources.setSystemPropertyIfIsNull(ERROR_HISTORY_SIZE, 1000);
 	}
 
 	private static final String LINE_SEPARATOR = System
 			.getProperty("line.separator");
-	private static final int maxQueueSize = new Integer(System.getProperties()
-			.get(ERROR_HISTORY_SIZE).toString());
+	private static final int maxQueueSize = new Integer(
+			JMResources.getSystemProperty(ERROR_HISTORY_SIZE));
 
 	private static List<ErrorMessageHistory> errorMessageHistoryList = new LinkedList<ErrorMessageHistory>();
 

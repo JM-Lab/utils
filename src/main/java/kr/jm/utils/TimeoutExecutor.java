@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+// use JMThread
 @Deprecated
 public class TimeoutExecutor {
 	public static void run(final Runnable runnableWork, final long timeoutInSec) {

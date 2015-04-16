@@ -18,6 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JMResources {
 
+	public static void setSystemPropertyIfIsNull(String key, Object value) {
+		if (!System.getProperties().containsKey(key))
+			System.setProperty(key, value.toString());
+	}
+
+	public static String getSystemProperty(String key) {
+		return System.getProperty(key);
+	}
+
 	public static URL getResourceURL(String pathInClassPath) {
 		return ClassLoader.getSystemResource(pathInClassPath);
 	}
@@ -26,7 +35,8 @@ public class JMResources {
 		try {
 			return getResourceURL(pathInClassPath).toURI();
 		} catch (URISyntaxException e) {
-			JMExceptionManager.logException(log, e, "getResourceURI", pathInClassPath);
+			JMExceptionManager.logException(log, e, "getResourceURI",
+					pathInClassPath);
 			return null;
 		}
 	}
@@ -41,7 +51,8 @@ public class JMResources {
 		try {
 			return getResourceURL(pathInClassPath).openStream();
 		} catch (IOException e) {
-			JMExceptionManager.logException(log, e, "getResourceInputStream", pathInClassPath);
+			JMExceptionManager.logException(log, e, "getResourceInputStream",
+					pathInClassPath);
 			return null;
 		}
 	}
@@ -54,7 +65,8 @@ public class JMResources {
 			properties.load(is);
 			is.close();
 		} catch (IOException e) {
-			JMExceptionManager.logException(log, e, "getProperties", pathInClassPath);
+			JMExceptionManager.logException(log, e, "getProperties",
+					pathInClassPath);
 			return properties;
 		}
 		return properties;
@@ -68,7 +80,8 @@ public class JMResources {
 			properties.load(reader);
 			reader.close();
 		} catch (IOException e) {
-			JMExceptionManager.logException(log, e, "getProperties", propertiesFile);
+			JMExceptionManager.logException(log, e, "getProperties",
+					propertiesFile);
 			return properties;
 		}
 		return properties;
@@ -86,7 +99,8 @@ public class JMResources {
 			writer.close();
 			return true;
 		} catch (IOException e) {
-			JMExceptionManager.logException(log, e, "saveProperties", inProperties, saveFile, comment);
+			JMExceptionManager.logException(log, e, "saveProperties",
+					inProperties, saveFile, comment);
 			return false;
 		}
 
