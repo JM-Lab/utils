@@ -12,6 +12,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
+import kr.jm.utils.exception.JMExceptionManager;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class JMResources {
 
 	public static URL getResourceURL(String pathInClassPath) {
@@ -22,7 +26,7 @@ public class JMResources {
 		try {
 			return getResourceURL(pathInClassPath).toURI();
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			JMExceptionManager.logException(log, e, "getResourceURI", pathInClassPath);
 			return null;
 		}
 	}
@@ -37,7 +41,7 @@ public class JMResources {
 		try {
 			return getResourceURL(pathInClassPath).openStream();
 		} catch (IOException e) {
-			e.printStackTrace();
+			JMExceptionManager.logException(log, e, "getResourceInputStream", pathInClassPath);
 			return null;
 		}
 	}
@@ -50,7 +54,7 @@ public class JMResources {
 			properties.load(is);
 			is.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			JMExceptionManager.logException(log, e, "getProperties", pathInClassPath);
 			return properties;
 		}
 		return properties;
@@ -64,7 +68,7 @@ public class JMResources {
 			properties.load(reader);
 			reader.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			JMExceptionManager.logException(log, e, "getProperties", propertiesFile);
 			return properties;
 		}
 		return properties;
@@ -81,8 +85,8 @@ public class JMResources {
 			inProperties.store(writer, comment);
 			writer.close();
 			return true;
-		} catch (IOException ex) {
-			ex.printStackTrace();
+		} catch (IOException e) {
+			JMExceptionManager.logException(log, e, "saveProperties", inProperties, saveFile, comment);
 			return false;
 		}
 
