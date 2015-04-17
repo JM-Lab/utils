@@ -1,11 +1,13 @@
 package kr.jm.utils.time;
 
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.ISODateTimeFormat;
 
 public class JMTimeUtil {
+	private static final String UTC = "UTC";
 	public static final String LONG_FORMAT_WITH_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; // 2014-03-21T18:31:23.000Z
 	public static final String LONG_FORMAT_WITH_PLUS_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; // 2014-03-21T18:31:23.000+0900
 	public static final String LONG_FORMAT_WITH_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSz"; // 2014-03-21T18:31:23.000KST
@@ -31,8 +33,8 @@ public class JMTimeUtil {
 	}
 
 	public static String getCurrentTimestamp(String timeFormat,
-			String idOfTimeZone) {
-		return getTime(System.currentTimeMillis(), timeFormat, idOfTimeZone);
+			String timeZoneId) {
+		return getTime(System.currentTimeMillis(), timeFormat, timeZoneId);
 	}
 
 	public static String getTimeAsDefaultUtcFormat(long epochTimestamp) {
@@ -65,7 +67,7 @@ public class JMTimeUtil {
 	}
 
 	public static String getTimeInUTC(long epochTimestamp, String timeFormat) {
-		return getTime(epochTimestamp, timeFormat, "UTC");
+		return getTime(epochTimestamp, timeFormat, UTC);
 	}
 
 	public static String getTime(long epochTimestamp, String timeFormat) {
@@ -73,10 +75,9 @@ public class JMTimeUtil {
 	}
 
 	public static String getTime(long epochTimestamp, String timeFormat,
-			String idOfTimeZone) {
-		SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
-		sdf.setTimeZone(TimeZone.getTimeZone(idOfTimeZone));
-		return sdf.format(epochTimestamp);
+			String timeZoneId) {
+		return new DateTime(epochTimestamp, DateTimeZone.forID(timeZoneId))
+				.toString(timeFormat);
 	}
 
 	public static String changeFormatAndTimeZone(String isoTimestampString,
@@ -182,4 +183,39 @@ public class JMTimeUtil {
 		return new SimpleDateFormat("Z").format(epochTimestamp);
 	}
 
+	public static long getTimeMillis(int year, int month, int date,
+			int hourOfDay, int minute, int second, int mills, String timeZoneId) {
+		return new DateTime(year, month, date, hourOfDay, minute, second,
+				mills, DateTimeZone.forID(timeZoneId)).getMillis();
+	}
+
+	public static long getTimeMillis(int year, int month, int date,
+			int hourOfDay, int minute, int second, String timeZoneId) {
+		return getTimeMillis(year, month, date, hourOfDay, minute, second, 0,
+				timeZoneId);
+	}
+
+	public static long getTimeMillis(int year, int month, int date,
+			int hourOfDay, int minute, String timeZoneId) {
+		return getTimeMillis(year, month, date, hourOfDay, minute, 0, 0,
+				timeZoneId);
+	}
+
+	public static long getTimeMillis(int year, int month, int date,
+			int hourOfDay, String timeZoneId) {
+		return getTimeMillis(year, month, date, hourOfDay, 0, 0, 0, timeZoneId);
+	}
+
+	public static long getTimeMillis(int year, int month, int date,
+			String timeZoneId) {
+		return getTimeMillis(year, month, date, 0, 0, 0, 0, timeZoneId);
+	}
+
+	public static long getTimeMillis(int year, int month, String timeZoneId) {
+		return getTimeMillis(year, month, 0, 0, 0, 0, 0, timeZoneId);
+	}
+
+	public static long getTimeMillis(int year, String timeZoneId) {
+		return getTimeMillis(year, 0, 0, 0, 0, 0, 0, timeZoneId);
+	}
 }
