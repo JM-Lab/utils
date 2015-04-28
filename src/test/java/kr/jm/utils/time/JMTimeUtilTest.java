@@ -3,6 +3,8 @@ package kr.jm.utils.time;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -106,6 +108,23 @@ public class JMTimeUtilTest {
 		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
 		assertEquals("2015-04-28T10:30:23.000Z",
 				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+
+	}
+
+	@Test
+	public void testGetTimeMillis() {
+		long timeMillis = JMTimeUtil.getTimeMillis(2015, 4, 16, 00, 2, 00,
+				"Asia/Seoul");
+		System.out.println(timeMillis);
+		System.out.println(JMTimeUtil.getTime(timeMillis));
+		System.out.println(JMTimeUtil.getTimeAsDefaultUtcFormat(timeMillis));
+
+		// Calender 에서는 Jan 이 0 부터 시작 함
+		timeMillis = JMTimeUtil.getTimeMillis(2015, Calendar.APRIL, 16, 00, 2,
+				00, "Asia/Seoul");
+		System.out.println(timeMillis);
+		System.out.println(JMTimeUtil.getTime(timeMillis));
+		System.out.println(JMTimeUtil.getTimeAsDefaultUtcFormat(timeMillis));
 
 	}
 

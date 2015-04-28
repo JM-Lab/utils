@@ -28,11 +28,6 @@ public class JMCollections {
 		return list;
 	}
 
-	public static <V> V[] sort(V[] array, Comparator<? super V> comparator) {
-		Arrays.sort(array, comparator);
-		return array;
-	}
-
 	public static <K, V> Map<K, V> sort(Map<K, V> map,
 			Comparator<? super K> comparator) {
 		TreeMap<K, V> sortedMap = new TreeMap<K, V>(comparator);

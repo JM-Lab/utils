@@ -53,4 +53,23 @@ public class JMTimeCalculator {
 		return targetTimestamp - numOfWeeks * aWeek;
 	}
 
+	public static long getTimestampPlusMinutes(long targetTimestamp,
+			int numOfMinutes) {
+		return targetTimestamp + numOfMinutes * aMinute;
+	}
+
+	public static long getTimestampPlusHours(long targetTimestamp,
+			int numOfHours) {
+		return targetTimestamp + numOfHours * anHour;
+	}
+
+	public static long getTimestampPlusDays(long targetTimestamp, int numOfDays) {
+		return targetTimestamp + numOfDays * aDay;
+	}
+
+	public static long getTimestampPlusWeeks(long targetTimestamp,
+			int numOfWeeks) {
+		return targetTimestamp + numOfWeeks * aWeek;
+	}
+
 }

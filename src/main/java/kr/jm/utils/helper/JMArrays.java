@@ -1,6 +1,7 @@
 package kr.jm.utils.helper;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class JMArrays {
 
@@ -11,6 +12,11 @@ public class JMArrays {
 
 	public static <V extends Comparable<V>> V[] sort(V[] array) {
 		Arrays.sort(array);
+		return array;
+	}
+
+	public static <V> V[] sort(V[] array, Comparator<? super V> comparator) {
+		Arrays.sort(array, comparator);
 		return array;
 	}
 
