@@ -86,6 +86,10 @@ public class JMTimeUtil {
 				dateFormatString, timeZoneId);
 	}
 
+	public static String changeTimestampInUTC(String isoTimestampString) {
+		return getTimeAsDefaultUtcFormat(changeTimestampStringToLong(isoTimestampString));
+	}
+
 	public static long changeTimestampStringToLong(String isoTimestampString) {
 		return ISODateTimeFormat.dateTime().parseDateTime(isoTimestampString)
 				.getMillis();
@@ -218,4 +222,5 @@ public class JMTimeUtil {
 	public static long getTimeMillis(int year, String timeZoneId) {
 		return getTimeMillis(year, 0, 0, 0, 0, 0, 0, timeZoneId);
 	}
+
 }

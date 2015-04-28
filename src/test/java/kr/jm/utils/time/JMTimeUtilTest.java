@@ -1,5 +1,6 @@
 package kr.jm.utils.time;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -71,6 +72,40 @@ public class JMTimeUtilTest {
 		System.out.println(JMTimeUtil.changeFormatAndTimeZone(
 				timeAsDefaultUtcFormat,
 				JMTimeUtil.LONG_FORMAT_WITH_PLUS_TIMEZONE, ASIA_SEOUL));
+
+	}
+
+	@Test
+	public void testChangeTimestampInUTC() {
+		String isoTimestampString = "2015-04-28T10:30:23.000+0900";
+		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+		assertEquals("2015-04-28T01:30:23.000Z",
+				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+
+		isoTimestampString = "2014-03-21T18:31:23.000Z";
+		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+		assertEquals("2014-03-21T18:31:23.000Z",
+				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+
+		isoTimestampString = "2015-04-28T10:30:23.000z";
+		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+		assertEquals("2015-04-28T10:30:23.000Z",
+				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+
+		isoTimestampString = "2015-04-28T10:30:23.00z";
+		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+		assertEquals("2015-04-28T10:30:23.000Z",
+				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+
+		isoTimestampString = "2015-04-28T10:30:23.0z";
+		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+		assertEquals("2015-04-28T10:30:23.000Z",
+				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+
+		isoTimestampString = "2015-04-28T10:30:23.0Z";
+		System.out.println(JMTimeUtil.changeTimestampInUTC(isoTimestampString));
+		assertEquals("2015-04-28T10:30:23.000Z",
+				JMTimeUtil.changeTimestampInUTC(isoTimestampString));
 
 	}
 

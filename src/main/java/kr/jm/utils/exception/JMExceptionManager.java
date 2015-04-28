@@ -73,7 +73,7 @@ public class JMExceptionManager {
 		errorCount = 0;
 	}
 
-	private static void increaseErrorCount() {
+	public static void increaseErrorCount() {
 		errorCount++;
 	}
 
