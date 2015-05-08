@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JMJson {
 
 	private static ObjectMapper jsonMapper = new ObjectMapper()
-			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);;
+			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
 	public static <D> String toJsonString(D dataObject) {
 		try {

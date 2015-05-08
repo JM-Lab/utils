@@ -14,7 +14,7 @@ public class JMExceptionManager {
 	private static final String ERROR_HISTORY_SIZE = "error.history.size";
 
 	static {
-		JMResources.setSystemPropertyIfIsNull(ERROR_HISTORY_SIZE, 1000);
+		JMResources.setSystemPropertyIfIsNull(ERROR_HISTORY_SIZE, 500);
 	}
 
 	private static final String LINE_SEPARATOR = System
