@@ -3,6 +3,9 @@ JMLab Java Utility Libraries
 ## version
 	0.3.0
 
+## Prerequisites:
+* [install Project Lombok for IDE](https://projectlombok.org/download.html)
+
 ## Installation
 
 Checkout the source code:
