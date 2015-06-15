@@ -91,8 +91,10 @@ public class JMTimeUtil {
 	}
 
 	public static long changeTimestampStringToLong(String isoTimestampString) {
-		return ISODateTimeFormat.dateTime().parseDateTime(isoTimestampString)
-				.getMillis();
+		return isoTimestampString.length() > 20 ? ISODateTimeFormat.dateTime()
+				.parseDateTime(isoTimestampString).getMillis()
+				: ISODateTimeFormat.dateTimeNoMillis()
+						.parseDateTime(isoTimestampString).getMillis();
 	}
 
 	public static String getYearyyyy(long epochTimestamp) {

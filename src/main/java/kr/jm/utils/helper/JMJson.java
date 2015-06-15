@@ -1,10 +1,15 @@
 package kr.jm.utils.helper;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 
+import kr.jm.utils.HttpGetRequester;
 import kr.jm.utils.exception.JMExceptionManager;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -121,6 +126,42 @@ public class JMJson {
 	public static <T> T fromJsonResource(String resourceInClasspath, Class<T> c) {
 		return fromJsonInputStream(
 				JMResources.getResourceInputStream(resourceInClasspath), c);
+	}
+
+	public static <T> T fromRestOrClasspathOrFilePath(
+			String resourceInRestUrlOrClasspathOrFilePath,
+			TypeReference<T> typeReference) {
+		return fromJsonString(
+				fromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath),
+				typeReference);
+	}
+
+	public static <T> T fromClasspathOrFilePath(
+			String resourceInClasspathOrFilePath, TypeReference<T> typeReference) {
+		return fromJsonString(
+				fromClasspathOrFilePath(resourceInClasspathOrFilePath),
+				typeReference);
+	}
+
+	public static String fromRestOrClasspathOrFilePath(
+			String resourceInRestUrlOrClasspathOrFilePath) {
+		return resourceInRestUrlOrClasspathOrFilePath.startsWith("http") ? HttpGetRequester
+				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
+				: fromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
+
+	}
+
+	public static String fromClasspathOrFilePath(
+			String resourceInClasspathOrFilePath) {
+		try {
+			StringWriter writer = new StringWriter();
+			IOUtils.copy(JMResources
+					.getResourceInputStream(resourceInClasspathOrFilePath),
+					writer);
+			return writer.toString();
+		} catch (IOException e) {
+			return JMFileIO.readString(new File(resourceInClasspathOrFilePath));
+		}
 	}
 
 	private static <T> T handleExetion(Exception e, String method, Object source) {

@@ -13,9 +13,10 @@ public class JMTimeUtilTest {
 	private static final String ASIA_SEOUL = "Asia/Seoul";
 	private static final String TIMESTAME1 = "2014-09-26T06:36:09.327Z";
 	private static final String TIMESTAME2 = "2014-09-26T15:36:09.327Z";
-	private static final String TIMESTAME3 = "2014-09-26T23:59:59.999Z";
+	private static final String TIMESTAME3 = "2014-09-26T23:59:59.9Z";
 	private static final String TIMESTAME4 = "2014-09-26T15:00:00.000Z";
-	private static final String TIMESTAME5 = "2014-09-26T14:59:59.999Z";
+	private static final String TIMESTAME5 = "2014-09-26T14:59:59.99Z";
+	private static final String TIMESTAME6 = "2014-09-26T14:59:59Z";
 	private static final String TIME_ZONE_ID = ASIA_SEOUL; // GMT, UTC
 	private static final String INDEX_FORMAT = "yyyy.MM.dd";
 
@@ -44,6 +45,11 @@ public class JMTimeUtilTest {
 		assertTrue("2014.09.27".equals(JMTimeUtil.changeFormatAndTimeZone(
 				TIMESTAME4, INDEX_FORMAT, TIME_ZONE_ID)));
 		System.out.println(JMTimeUtil.changeFormatAndTimeZone(TIMESTAME5,
+				INDEX_FORMAT, TIME_ZONE_ID));
+		assertTrue("2014.09.26".equals(JMTimeUtil.changeFormatAndTimeZone(
+				TIMESTAME5, INDEX_FORMAT, TIME_ZONE_ID)));
+
+		System.out.println(JMTimeUtil.changeFormatAndTimeZone(TIMESTAME6,
 				INDEX_FORMAT, TIME_ZONE_ID));
 		assertTrue("2014.09.26".equals(JMTimeUtil.changeFormatAndTimeZone(
 				TIMESTAME5, INDEX_FORMAT, TIME_ZONE_ID)));
