@@ -1,7 +1,7 @@
 JMLab Java Utility Libraries
 ============================
 ## version
-	0.3.0
+	0.3.1
 
 ## Prerequisites:
 * [install Project Lombok for IDE](https://projectlombok.org/download.html)
@@ -21,6 +21,6 @@ Set up pom.xml :
     <dependency>
 			<groupId>jmlab</groupId>
 			<artifactId>jmlab-utils</artifactId>
-			<version>0.3.0</version>
+			<version>0.3.1</version>
 	</dependency>
     (...)

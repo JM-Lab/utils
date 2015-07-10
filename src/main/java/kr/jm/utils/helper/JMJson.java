@@ -1,15 +1,11 @@
 package kr.jm.utils.helper;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 
 import kr.jm.utils.HttpGetRequester;
 import kr.jm.utils.exception.JMExceptionManager;
 import lombok.extern.slf4j.Slf4j;
-
-import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,7 +22,8 @@ public class JMJson {
 		try {
 			return jsonMapper.writeValueAsString(dataObject);
 		} catch (JsonProcessingException e) {
-			return handleExetion(e, "toJsonString", dataObject);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"toJsonString", dataObject);
 		}
 	}
 
@@ -44,7 +41,8 @@ public class JMJson {
 			jsonMapper.writeValue(returnJsonFile, jsonString);
 			return returnJsonFile;
 		} catch (Exception e) {
-			return handleExetion(e, "toJsonFile", jsonString);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"toJsonFile", jsonString);
 		}
 	}
 
@@ -53,7 +51,8 @@ public class JMJson {
 			jsonMapper.writeValue(returnJsonFile, dataObject);
 			return returnJsonFile;
 		} catch (Exception e) {
-			return handleExetion(e, "toJsonFile", dataObject);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"toJsonFile", dataObject);
 		}
 	}
 
@@ -61,7 +60,8 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(bytes, typeReference);
 		} catch (Exception e) {
-			return handleExetion(e, "fromBytes", new String(bytes));
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"fromBytes", new String(bytes));
 		}
 	}
 
@@ -69,7 +69,8 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(bytes, c);
 		} catch (Exception e) {
-			return handleExetion(e, "fromBytes", new String(bytes));
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"fromBytes", new String(bytes));
 		}
 	}
 
@@ -87,7 +88,8 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(jsonFile, typeReference);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonFile", jsonFile);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"fromJsonFile", jsonFile);
 		}
 	}
 
@@ -95,7 +97,8 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(jsonFile, c);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonFile", jsonFile);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"fromJsonFile", jsonFile);
 		}
 	}
 
@@ -104,7 +107,8 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(inputStream, typeReference);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonInputStream", inputStream);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"fromJsonInputStream", inputStream);
 		}
 	}
 
@@ -112,7 +116,8 @@ public class JMJson {
 		try {
 			return jsonMapper.readValue(inputStream, c);
 		} catch (Exception e) {
-			return handleExetion(e, "fromJsonInputStream", inputStream);
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"fromJsonInputStream", inputStream);
 		}
 	}
 
@@ -132,14 +137,14 @@ public class JMJson {
 			String resourceInRestUrlOrClasspathOrFilePath,
 			TypeReference<T> typeReference) {
 		return fromJsonString(
-				fromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath),
+				JMFileIO.readString(resourceInRestUrlOrClasspathOrFilePath),
 				typeReference);
 	}
 
 	public static <T> T fromClasspathOrFilePath(
 			String resourceInClasspathOrFilePath, TypeReference<T> typeReference) {
 		return fromJsonString(
-				fromClasspathOrFilePath(resourceInClasspathOrFilePath),
+				JMFileIO.readString(resourceInClasspathOrFilePath),
 				typeReference);
 	}
 
@@ -147,26 +152,7 @@ public class JMJson {
 			String resourceInRestUrlOrClasspathOrFilePath) {
 		return resourceInRestUrlOrClasspathOrFilePath.startsWith("http") ? HttpGetRequester
 				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
-				: fromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
-
-	}
-
-	public static String fromClasspathOrFilePath(
-			String resourceInClasspathOrFilePath) {
-		try {
-			StringWriter writer = new StringWriter();
-			IOUtils.copy(JMResources
-					.getResourceInputStream(resourceInClasspathOrFilePath),
-					writer);
-			return writer.toString();
-		} catch (IOException e) {
-			return JMFileIO.readString(new File(resourceInClasspathOrFilePath));
-		}
-	}
-
-	private static <T> T handleExetion(Exception e, String method, Object source) {
-		JMExceptionManager.logException(log, e, method, source);
-		return null;
+				: JMFileIO.readString(resourceInRestUrlOrClasspathOrFilePath);
 	}
 
 }

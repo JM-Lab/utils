@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import kr.jm.utils.exception.JMExceptionManager;
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.io.FileUtils;
 
+@Slf4j
 public class JMFileIO {
 
 	public static boolean writeString(String inputString, File targetfile) {
@@ -20,51 +24,65 @@ public class JMFileIO {
 		return true;
 	}
 
-	public static String readString(final File targetfile) {
-		return (String) read(targetfile, new Reader<String>() {
-			public String read() throws IOException {
-				return FileUtils.readFileToString(targetfile);
-			}
-		});
-	}
-
-	public static String readString(final File targetfile, final String encoding) {
-		return (String) read(targetfile, new Reader<String>() {
-			public String read() throws IOException {
-				return FileUtils.readFileToString(targetfile, encoding);
-			}
-		});
-	}
-
-	public static List<String> readLines(final File targetfile) {
-		return (List<String>) read(targetfile, new Reader<List<String>>() {
-			public List<String> read() throws IOException {
-				return FileUtils.readLines(targetfile);
-			}
-		});
-	}
-
-	public static List<String> readLines(final File targetfile,
-			final String encoding) {
-		return (List<String>) read(targetfile, new Reader<List<String>>() {
-			public List<String> read() throws IOException {
-				return FileUtils.readLines(targetfile, encoding);
-			}
-		});
-	}
-
-	private static <R> R read(File targetfile, Reader<R> reader) {
-		if (!targetfile.exists())
-			return null;
+	public static String readString(File targetfile) {
 		try {
-			return reader.read();
+			return FileUtils.readFileToString(targetfile);
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readString", targetfile);
 		}
 	}
 
-	private interface Reader<R> {
-		R read() throws IOException;
+	public static String readString(File targetfile, String encoding) {
+		try {
+			return FileUtils.readFileToString(targetfile, encoding);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readString", targetfile);
+		}
 	}
+
+	public static String readString(String classpathOrFilePath) {
+		return readString(getFile(classpathOrFilePath));
+	}
+
+	public static String readString(String classpathOrFilePath, String encoding) {
+		return readString(getFile(classpathOrFilePath), encoding);
+	}
+
+	public static List<String> readLines(File targetfile) {
+		try {
+			return FileUtils.readLines(targetfile);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readLines", targetfile);
+		}
+	}
+
+	public static List<String> readLines(File targetfile, String encoding) {
+		try {
+			return FileUtils.readLines(targetfile, encoding);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readLines", targetfile);
+		}
+	}
+
+	public static List<String> readLines(String classpathOrFilePath) {
+		return readLines(getFile(classpathOrFilePath));
+	}
+
+	public static List<String> readLines(String classpathOrFilePath,
+			String encoding) {
+		return readLines(getFile(classpathOrFilePath), encoding);
+	}
+
+	private static File getFile(String classpathOrFilePath) {
+		try {
+			return new File(JMResources.getResourceURI(classpathOrFilePath));
+		} catch (Exception e) {
+			return new File(classpathOrFilePath);
+		}
+	}
+
 }

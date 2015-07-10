@@ -77,4 +77,10 @@ public class JMExceptionManager {
 		errorCount++;
 	}
 
+	public static <T> T handleExceptionAndReturnNull(Logger log, Exception e,
+			String method, Object... sources) {
+		logException(log, e, method, sources);
+		return null;
+	}
+
 }

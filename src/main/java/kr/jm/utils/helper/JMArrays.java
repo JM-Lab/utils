@@ -25,7 +25,16 @@ public class JMArrays {
 	}
 
 	public static <V> boolean isNullOrEmpty(V[] array) {
-		return (array == null || array.length == 0) ? true : false;
+		return array == null || array.length == 0 ? true : false;
+	}
+
+	public static String[] buildArrayFromCsv(String csvString) {
+		return csvString.split(",");
+	}
+
+	public static String[] buildArrayWithDelimeter(String stringWithDelimeter,
+			String delimeter) {
+		return stringWithDelimeter.split(delimeter);
 	}
 
 }

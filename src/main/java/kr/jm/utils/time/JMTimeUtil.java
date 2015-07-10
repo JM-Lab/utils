@@ -1,13 +1,16 @@
 package kr.jm.utils.time;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.ISODateTimeFormat;
 
 public class JMTimeUtil {
-	private static final String UTC = "UTC";
+	public static final String UTC = "UTC";
 	public static final String LONG_FORMAT_WITH_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; // 2014-03-21T18:31:23.000Z
 	public static final String LONG_FORMAT_WITH_PLUS_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; // 2014-03-21T18:31:23.000+0900
 	public static final String LONG_FORMAT_WITH_TIMEZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSz"; // 2014-03-21T18:31:23.000KST
@@ -95,6 +98,28 @@ public class JMTimeUtil {
 				.parseDateTime(isoTimestampString).getMillis()
 				: ISODateTimeFormat.dateTimeNoMillis()
 						.parseDateTime(isoTimestampString).getMillis();
+	}
+
+	public static long changeTimestampStringToLong(String dateFormatPettern,
+			String timezoneId, String dateString) throws ParseException {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				dateFormatPettern, Locale.US);
+		if (timezoneId != null)
+			simpleDateFormat.setTimeZone(TimeZone.getTimeZone(timezoneId));
+		return changeTimestampStringToLong(simpleDateFormat, dateString);
+	}
+
+	public static long changeTimestampStringToLong(String dateFormatPettern,
+			String dateString) throws ParseException {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				dateFormatPettern);
+		return changeTimestampStringToLong(simpleDateFormat, dateString);
+	}
+
+	public static long changeTimestampStringToLong(
+			SimpleDateFormat simpleDateFormat, String dateString)
+			throws ParseException {
+		return simpleDateFormat.parse(dateString).getTime();
 	}
 
 	public static String getYearyyyy(long epochTimestamp) {

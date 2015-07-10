@@ -43,34 +43,38 @@ public class JMCollections {
 
 	public static <K, V> V getValueOrNew(Map<K, V> map, K key, V newValue) {
 		synchronized (map) {
-			V value = map.get(key);
-			if (value == null) {
-				value = newValue;
-				map.put(key, value);
-			}
-			return value;
+			if (!map.containsKey(key))
+				map.put(key, newValue);
 		}
+		return map.get(key);
 	}
 
 	public static <K, V> V getValueOrNew(Map<K, V> map, K key,
 			NewValueBuilder<V> newValueBuilder) {
 		synchronized (map) {
-			V value = map.get(key);
-			if (value == null) {
-				value = newValueBuilder.buildNewValue();
-				map.put(key, value);
-			}
-			return value;
+			if (!map.containsKey(key))
+				map.put(key, newValueBuilder.buildNewValue());
 		}
+		return map.get(key);
 	}
 
 	public interface NewValueBuilder<V> {
 		public V buildNewValue();
 	}
 
-	public static <E> List<E> buildList(
-			@SuppressWarnings("unchecked") E... objects) {
+	@SuppressWarnings("unchecked")
+	public static <E> List<E> buildList(E... objects) {
 		return Arrays.asList(objects);
+	}
+
+	public static List<String> buildListFromCsv(String csvString) {
+		return buildList(JMArrays.buildArrayFromCsv(csvString));
+	}
+
+	public static List<String> buildListWithDelimeter(
+			String stringWithDelimeter, String delimeter) {
+		return buildList(JMArrays.buildArrayWithDelimeter(stringWithDelimeter,
+				delimeter));
 	}
 
 }

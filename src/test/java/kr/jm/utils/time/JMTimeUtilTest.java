@@ -134,4 +134,56 @@ public class JMTimeUtilTest {
 
 	}
 
+	@Test
+	public void testChangeTimestampStringToLong() throws Exception {
+		String defaultLogDateFormat = "dd/MMM/yyyy:HH:mm:ss";
+		String dateString = "27/Oct/2000:09:27:09";
+		long changeTimestampStringToLong = JMTimeUtil
+				.changeTimestampStringToLong(defaultLogDateFormat, "UTC",
+						dateString);
+		System.out.println(changeTimestampStringToLong);
+		System.out.println(JMTimeUtil
+				.getTimeAsDefaultUtcFormat(changeTimestampStringToLong));
+
+		defaultLogDateFormat = "dd/MM월/yyyy:HH:mm:ss";
+		String timezoneId = "GMT+2";
+		dateString = "27/8월/2000:09:27:09";
+
+		changeTimestampStringToLong = JMTimeUtil.changeTimestampStringToLong(
+				defaultLogDateFormat, timezoneId, dateString);
+		System.out.println(changeTimestampStringToLong);
+		System.out.println(JMTimeUtil
+				.getTimeAsDefaultUtcFormat(changeTimestampStringToLong));
+
+		changeTimestampStringToLong = JMTimeUtil.changeTimestampStringToLong(
+				defaultLogDateFormat, "UTC", dateString);
+		System.out.println(changeTimestampStringToLong);
+		System.out.println(JMTimeUtil
+				.getTimeAsDefaultUtcFormat(changeTimestampStringToLong));
+
+		// zoneId null 이면 시스템 기본 timezoneId를 사용!!!
+		changeTimestampStringToLong = JMTimeUtil.changeTimestampStringToLong(
+				defaultLogDateFormat, null, dateString);
+		System.out.println(changeTimestampStringToLong);
+		System.out.println(JMTimeUtil
+				.getTimeAsDefaultUtcFormat(changeTimestampStringToLong));
+
+		defaultLogDateFormat = "dd/MM월/yyyy:HH:mm:ss Z";
+		dateString = "27/8월/2000:09:27:09 -0400";
+
+		changeTimestampStringToLong = JMTimeUtil.changeTimestampStringToLong(
+				defaultLogDateFormat, "UTC", dateString);
+		System.out.println(changeTimestampStringToLong);
+		System.out.println(JMTimeUtil
+				.getTimeAsDefaultUtcFormat(changeTimestampStringToLong));
+
+		// format에 zone 정보가 있으면 zoneId를 셋팅해도 먹지 않음!!!
+		changeTimestampStringToLong = JMTimeUtil.changeTimestampStringToLong(
+				defaultLogDateFormat, timezoneId, dateString);
+		System.out.println(changeTimestampStringToLong);
+		System.out.println(JMTimeUtil
+				.getTimeAsDefaultUtcFormat(changeTimestampStringToLong));
+
+	}
+
 }
