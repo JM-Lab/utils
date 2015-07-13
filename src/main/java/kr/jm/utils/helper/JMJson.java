@@ -3,7 +3,6 @@ package kr.jm.utils.helper;
 import java.io.File;
 import java.io.InputStream;
 
-import kr.jm.utils.HttpGetRequester;
 import kr.jm.utils.exception.JMExceptionManager;
 import lombok.extern.slf4j.Slf4j;
 
@@ -137,22 +136,15 @@ public class JMJson {
 			String resourceInRestUrlOrClasspathOrFilePath,
 			TypeReference<T> typeReference) {
 		return fromJsonString(
-				JMFileIO.readString(resourceInRestUrlOrClasspathOrFilePath),
+				JMIO.getStringfromRestOrClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath),
 				typeReference);
 	}
 
 	public static <T> T fromClasspathOrFilePath(
 			String resourceInClasspathOrFilePath, TypeReference<T> typeReference) {
 		return fromJsonString(
-				JMFileIO.readString(resourceInClasspathOrFilePath),
+				JMIO.getStringFromClasspathOrFilePath(resourceInClasspathOrFilePath),
 				typeReference);
-	}
-
-	public static String fromRestOrClasspathOrFilePath(
-			String resourceInRestUrlOrClasspathOrFilePath) {
-		return resourceInRestUrlOrClasspathOrFilePath.startsWith("http") ? HttpGetRequester
-				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
-				: JMFileIO.readString(resourceInRestUrlOrClasspathOrFilePath);
 	}
 
 }

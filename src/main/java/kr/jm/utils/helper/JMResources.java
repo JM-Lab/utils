@@ -10,10 +10,13 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 
 import kr.jm.utils.exception.JMExceptionManager;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.io.IOUtils;
 
 @Slf4j
 public class JMResources {
@@ -48,26 +51,18 @@ public class JMResources {
 	}
 
 	public static InputStream getResourceInputStream(String pathInClassPath) {
-		try {
-			return getResourceURL(pathInClassPath).openStream();
-		} catch (IOException e) {
-			JMExceptionManager.logException(log, e, "getResourceInputStream",
-					pathInClassPath);
-			return null;
-		}
+		return ClassLoader.getSystemResourceAsStream(pathInClassPath);
 	}
 
 	public static Properties getProperties(String pathInClassPath) {
 		Properties properties = new Properties();
+		InputStream is = getResourceInputStream(pathInClassPath);
 		try {
-			InputStream is = ClassLoader
-					.getSystemResourceAsStream(pathInClassPath);
 			properties.load(is);
 			is.close();
 		} catch (IOException e) {
-			JMExceptionManager.logException(log, e, "getProperties",
-					pathInClassPath);
-			return properties;
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"getProperties", pathInClassPath);
 		}
 		return properties;
 	}
@@ -82,7 +77,6 @@ public class JMResources {
 		} catch (IOException e) {
 			JMExceptionManager.logException(log, e, "getProperties",
 					propertiesFile);
-			return properties;
 		}
 		return properties;
 	}
@@ -104,6 +98,61 @@ public class JMResources {
 			return false;
 		}
 
+	}
+
+	public static String readString(InputStream resourceInputStream) {
+		try {
+			return IOUtils.toString(resourceInputStream);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readString", resourceInputStream);
+		}
+	}
+
+	public static String readString(InputStream resourceInputStream,
+			String encoding) {
+		try {
+			return IOUtils.toString(resourceInputStream, encoding);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readString", resourceInputStream, encoding);
+		}
+	}
+
+	public static String readString(String resourceClasspath) {
+		return readString(getResourceInputStream(resourceClasspath));
+	}
+
+	public static String readString(String resourceClasspath, String encoding) {
+		return readString(getResourceInputStream(resourceClasspath), encoding);
+	}
+
+	public static List<String> readLines(InputStream resourceInputStream) {
+		try {
+			return IOUtils.readLines(resourceInputStream);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readLines", resourceInputStream);
+		}
+	}
+
+	public static List<String> readLines(InputStream resourceInputStream,
+			String encoding) {
+		try {
+			return IOUtils.readLines(resourceInputStream, encoding);
+		} catch (IOException e) {
+			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
+					"readLines", resourceInputStream, encoding);
+		}
+	}
+
+	public static List<String> readLines(String resourceClasspath) {
+		return readLines(getResourceInputStream(resourceClasspath));
+	}
+
+	public static List<String> readLines(String resourceClasspath,
+			String encoding) {
+		return readLines(getResourceInputStream(resourceClasspath), encoding);
 	}
 
 }

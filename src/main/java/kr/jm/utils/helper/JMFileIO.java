@@ -42,12 +42,12 @@ public class JMFileIO {
 		}
 	}
 
-	public static String readString(String classpathOrFilePath) {
-		return readString(getFile(classpathOrFilePath));
+	public static String readString(String filePath) {
+		return readString(getFile(filePath));
 	}
 
-	public static String readString(String classpathOrFilePath, String encoding) {
-		return readString(getFile(classpathOrFilePath), encoding);
+	public static String readString(String filePath, String encoding) {
+		return readString(getFile(filePath), encoding);
 	}
 
 	public static List<String> readLines(File targetfile) {
@@ -68,21 +68,16 @@ public class JMFileIO {
 		}
 	}
 
-	public static List<String> readLines(String classpathOrFilePath) {
-		return readLines(getFile(classpathOrFilePath));
+	public static List<String> readLines(String filePath) {
+		return readLines(getFile(filePath));
 	}
 
-	public static List<String> readLines(String classpathOrFilePath,
-			String encoding) {
-		return readLines(getFile(classpathOrFilePath), encoding);
+	public static List<String> readLines(String filePath, String encoding) {
+		return readLines(getFile(filePath), encoding);
 	}
 
-	private static File getFile(String classpathOrFilePath) {
-		try {
-			return new File(JMResources.getResourceURI(classpathOrFilePath));
-		} catch (Exception e) {
-			return new File(classpathOrFilePath);
-		}
+	private static File getFile(String filePath) {
+		return new File(filePath);
 	}
 
 }

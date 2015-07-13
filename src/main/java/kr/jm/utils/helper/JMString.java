@@ -15,7 +15,7 @@ public class JMString {
 		return NUMBER_PATTERN.matcher(numberString).matches();
 	}
 
-	public static List<String> splitLineByaLine(String stringByLine) {
+	public static List<String> splitLineByLine(String stringByLine) {
 		return JMCollections
 				.buildListWithDelimeter(stringByLine, lineSeperator);
 	}
