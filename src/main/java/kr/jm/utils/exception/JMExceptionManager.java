@@ -83,4 +83,10 @@ public class JMExceptionManager {
 		return null;
 	}
 
+	public static boolean handleExceptionAndReturnFalse(Logger log,
+			Exception e, String method, Object... sources) {
+		logException(log, e, method, sources);
+		return false;
+	}
+
 }

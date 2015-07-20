@@ -3,7 +3,11 @@ package kr.jm.utils.helper;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import kr.jm.utils.AutoStringBuilder;
+
 public class JMString {
+
+	public static final String COMMA = ",";
 
 	public static final Pattern NUMBER_PATTERN = Pattern
 			.compile("[+-]?\\d*(\\.\\d+)?");
@@ -18,6 +22,14 @@ public class JMString {
 	public static List<String> splitLineByLine(String stringByLine) {
 		return JMCollections
 				.buildListWithDelimeter(stringByLine, lineSeperator);
+	}
+
+	public static String buildCsvString(List<String> stringList) {
+		return buildCsvString(stringList.toArray(new String[stringList.size()]));
+	}
+
+	public static String buildCsvString(String... strings) {
+		return new AutoStringBuilder(COMMA).append(strings).autoToString();
 	}
 
 }

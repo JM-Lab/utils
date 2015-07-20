@@ -10,8 +10,18 @@ public class JMTimeCalculator {
 	private static final long aDay = Milliseconds.DAY.getValue();
 	private static final long aWeek = Milliseconds.WEEK.getValue();
 
-	public static long getTimestampMinusTimes(long targetTimestamp, long times) {
-		return targetTimestamp - times;
+	public static long getTimestampMinusTimestamp(long targetTimestamp,
+			long timestamp) {
+		return targetTimestamp - timestamp;
+	}
+
+	public static long getCurrentMinusTimestamp(long timeMillis) {
+		return System.currentTimeMillis() - timeMillis;
+	}
+
+	public static long getCurrentMinusTimestamp(String isoTimestampString) {
+		return getCurrentMinusTimestamp(JMTimeUtil
+				.changeTimestampStringToLong(isoTimestampString));
 	}
 
 	public static long getTimestampMinusParemeters(long targetTimestamp,

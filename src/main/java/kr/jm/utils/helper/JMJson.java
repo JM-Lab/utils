@@ -25,7 +25,7 @@ public class JMJson {
 					"toJsonString", dataObject);
 		}
 	}
-	
+
 	public static <D> String toJsonStringOrNull(D dataObject) {
 		try {
 			return jsonMapper.writeValueAsString(dataObject);
@@ -71,7 +71,7 @@ public class JMJson {
 					"toJsonFile", dataObject);
 		}
 	}
-	
+
 	public static <D> File toJsonFileOrNull(D dataObject, File returnJsonFile) {
 		try {
 			jsonMapper.writeValue(returnJsonFile, dataObject);
@@ -90,8 +90,9 @@ public class JMJson {
 					"fromBytes", new String(bytes));
 		}
 	}
-	
-	public static <T> T fromBytesOrNull(byte[] bytes, TypeReference<T> typeReference) {
+
+	public static <T> T fromBytesOrNull(byte[] bytes,
+			TypeReference<T> typeReference) {
 		try {
 			return jsonMapper.readValue(bytes, typeReference);
 		} catch (Exception e) {
@@ -107,7 +108,7 @@ public class JMJson {
 					"fromBytes", new String(bytes));
 		}
 	}
-	
+
 	public static <T> T fromBytesOrNull(byte[] bytes, Class<T> c) {
 		try {
 			return jsonMapper.readValue(bytes, c);
@@ -120,7 +121,7 @@ public class JMJson {
 			TypeReference<T> typeReference) {
 		return fromBytes(jsonString.getBytes(), typeReference);
 	}
-	
+
 	public static <T> T fromJsonStringOrNull(String jsonString,
 			TypeReference<T> typeReference) {
 		return fromBytesOrNull(jsonString.getBytes(), typeReference);
@@ -129,7 +130,7 @@ public class JMJson {
 	public static <T> T fromJsonString(String jsonString, Class<T> c) {
 		return fromBytes(jsonString.getBytes(), c);
 	}
-	
+
 	public static <T> T fromJsonStringOrNull(String jsonString, Class<T> c) {
 		return fromBytesOrNull(jsonString.getBytes(), c);
 	}
@@ -143,7 +144,7 @@ public class JMJson {
 					"fromJsonFile", jsonFile);
 		}
 	}
-	
+
 	public static <T> T fromJsonFileOrNull(File jsonFile,
 			TypeReference<T> typeReference) {
 		try {
@@ -161,7 +162,7 @@ public class JMJson {
 					"fromJsonFile", jsonFile);
 		}
 	}
-	
+
 	public static <T> T fromJsonFileOrNull(File jsonFile, Class<T> c) {
 		try {
 			return jsonMapper.readValue(jsonFile, c);
@@ -179,7 +180,7 @@ public class JMJson {
 					"fromJsonInputStream", inputStream);
 		}
 	}
-	
+
 	public static <T> T fromJsonInputStreamOrNull(InputStream inputStream,
 			TypeReference<T> typeReference) {
 		try {
@@ -197,8 +198,9 @@ public class JMJson {
 					"fromJsonInputStream", inputStream);
 		}
 	}
-	
-	public static <T> T fromJsonInputStreamOrNull(InputStream inputStream, Class<T> c) {
+
+	public static <T> T fromJsonInputStreamOrNull(InputStream inputStream,
+			Class<T> c) {
 		try {
 			return jsonMapper.readValue(inputStream, c);
 		} catch (Exception e) {

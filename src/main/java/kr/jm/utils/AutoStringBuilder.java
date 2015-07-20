@@ -30,6 +30,17 @@ public class AutoStringBuilder {
 		return this;
 	}
 
+	public AutoStringBuilder append(Object object) {
+		sb.append(object.toString()).append(autoAppendingString);
+		return this;
+	}
+
+	public AutoStringBuilder append(Object... objects) {
+		for (Object o : objects)
+			append(o);
+		return this;
+	}
+
 	public StringBuilder getStringBuilder() {
 		return sb;
 	}
