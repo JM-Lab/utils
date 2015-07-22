@@ -32,4 +32,7 @@ public class JMString {
 		return new AutoStringBuilder(COMMA).append(strings).autoToString();
 	}
 
+	public static boolean isNullOrEmpty(String keyTypeExpression) {
+		return keyTypeExpression == null || "".equals(keyTypeExpression); 
+	}
 }
