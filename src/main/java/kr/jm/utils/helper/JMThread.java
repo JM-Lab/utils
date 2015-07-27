@@ -12,6 +12,11 @@ public class JMThread {
 				.newFixedThreadPool(numOfThread);
 	}
 
+	public static ExecutorService newThreadPoolWithAvailableProcessors() {
+		return Executors.newFixedThreadPool(Runtime.getRuntime()
+				.availableProcessors());
+	}
+
 	public static void sleep(long millis) {
 		try {
 			Thread.sleep(millis);
