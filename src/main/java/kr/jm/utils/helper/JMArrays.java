@@ -28,6 +28,10 @@ public class JMArrays {
 		return array == null || array.length == 0 ? true : false;
 	}
 
+	public static <V> boolean isNotNullOrEmpty(V[] array) {
+		return !isNullOrEmpty(array);
+	}
+
 	public static String[] buildArrayFromCsv(String csvString) {
 		return csvString.split(",");
 	}

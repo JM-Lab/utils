@@ -14,7 +14,7 @@ public class JMStringTest {
 	@Test
 	public void test() {
 		List<String> buildList = JMCollections.buildList("jm", "jm");
-		System.out.println(JMString.buildCsvString(buildList));
+		System.out.println(JMString.joiningWithComma(buildList));
 	}
 
 }

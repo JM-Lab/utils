@@ -1,12 +1,36 @@
 package kr.jm.utils.helper;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class JMThread {
+
+	public static BlockingQueue<Runnable> getThreadQueue(
+			ExecutorService executorService) {
+		return ((ThreadPoolExecutor) executorService).getQueue();
+	}
+
+	public static int getActiveCount(ExecutorService executorService) {
+		return ((ThreadPoolExecutor) executorService).getActiveCount();
+	}
+
+	public static long getCompletedTaskCount(ExecutorService executorService) {
+		return ((ThreadPoolExecutor) executorService).getCompletedTaskCount();
+	}
+
+	public static void purge(ExecutorService executorService) {
+		((ThreadPoolExecutor) executorService).purge();
+	}
+
+	public static long getPoolSize(ExecutorService executorService) {
+		return ((ThreadPoolExecutor) executorService).getPoolSize();
+	}
+
 	public static ExecutorService newThreadPool(int numOfThread) {
 		return numOfThread < 1 ? Executors.newCachedThreadPool() : Executors
 				.newFixedThreadPool(numOfThread);

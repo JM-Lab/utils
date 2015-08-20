@@ -1,7 +1,7 @@
 JMLab Java Utility Libraries
 ============================
 ## version
-	0.3.1
+	0.8.0
 
 ## Prerequisites:
 * Above Java 8
@@ -22,6 +22,6 @@ Set up pom.xml :
     <dependency>
 			<groupId>jmlab</groupId>
 			<artifactId>jmlab-utils</artifactId>
-			<version>0.3.1</version>
+			<version>0.8.0</version>
 	</dependency>
     (...)
