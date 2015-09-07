@@ -5,11 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kr.jm.utils.spring.DestroyInterface;
-import kr.jm.utils.spring.Destroyer;
-
-public abstract class AbstractBundle<T extends DestroyInterface> implements
-		BundleInterface<T> {
+public abstract class AbstractBundle<T> implements BundleInterface<T> {
 
 	protected Map<String, T> targetMap = new HashMap<String, T>();
 
@@ -30,18 +26,12 @@ public abstract class AbstractBundle<T extends DestroyInterface> implements
 
 	@Override
 	public void removeTarget(String targetId) throws Exception {
-		getTarget(targetId).cleanUp();
 		targetMap.remove(targetId);
 	}
 
 	@Override
 	public List<T> getTargetList() {
 		return new ArrayList<T>(targetMap.values());
-	}
-
-	@Override
-	public void cleanUp() throws RuntimeException {
-		Destroyer.cleanUp(getTargetList());
 	}
 
 }

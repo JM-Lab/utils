@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.InputStream;
 
 import kr.jm.utils.exception.JMExceptionManager;
+import kr.jm.utils.io.JMFileIO;
+import kr.jm.utils.io.JMIO;
+import kr.jm.utils.io.JMResources;
 import lombok.extern.slf4j.Slf4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,11 +39,6 @@ public class JMJson {
 
 	public static String toJsonString(File jsonFile) {
 		return JMFileIO.readString(jsonFile);
-	}
-
-	@Deprecated
-	public static String toJsonString(String resourceInClasspath) {
-		return toJsonString(JMResources.getResourceFile(resourceInClasspath));
 	}
 
 	public static File toJsonFile(String jsonString, File returnJsonFile) {
@@ -224,7 +222,8 @@ public class JMJson {
 			String resourceInRestUrlOrClasspathOrFilePath,
 			TypeReference<T> typeReference) {
 		return fromJsonString(
-				JMIO.getStringfromRestOrClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath),
+				JMRestfulResource
+						.getStringfromRestOrClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath),
 				typeReference);
 	}
 

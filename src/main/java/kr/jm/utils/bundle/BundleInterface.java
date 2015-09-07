@@ -2,10 +2,7 @@ package kr.jm.utils.bundle;
 
 import java.util.List;
 
-import kr.jm.utils.spring.DestroyInterface;
-
-public interface BundleInterface<T extends DestroyInterface> extends
-		DestroyInterface {
+public interface BundleInterface<T> {
 
 	public abstract T getTarget(String targetId);
 
@@ -16,7 +13,5 @@ public interface BundleInterface<T extends DestroyInterface> extends
 	public abstract void removeTarget(String targetId) throws Exception;
 
 	public abstract List<T> getTargetList();
-
-	public abstract void cleanUp() throws RuntimeException;
 
 }

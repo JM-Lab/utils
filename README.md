@@ -5,6 +5,7 @@ JMLab Java Utility Libraries
 
 ## Prerequisites:
 * Above Java 8
+* [JMLab Java 8 Utility Libraries](https://github.com/JM-Lab/utils-java8)
 * [install Project Lombok for IDE](https://projectlombok.org/download.html)
 
 ## Installation
