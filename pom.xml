@@ -52,13 +52,12 @@
 		<dependency>
 			<groupId>jmlab</groupId>
 			<artifactId>jmlab-utils-java8</artifactId>
-			<version>0.1.5</version>
+			<version>0.1.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.16.4</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
