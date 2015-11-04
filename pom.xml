@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jmlab</groupId>
 	<artifactId>jmlab-utils</artifactId>
-	<version>0.8.0</version>
+	<version>0.8.1</version>
 	<name>JMLab-Utils</name>
 	<description>Java Utility Libraries</description>
 	<url>https://github.com/JM-Lab/utils</url>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import kr.jm.utils.HttpGetRequester;
 import kr.jm.utils.datastructure.JMCollections;
-import kr.jm.utils.io.JMIO;
 
 public class JMRestfulResource {
 	private static final String HTTP = "http";
@@ -13,14 +12,16 @@ public class JMRestfulResource {
 			String resourceInRestUrlOrClasspathOrFilePath, String encoding) {
 		return resourceInRestUrlOrClasspathOrFilePath.startsWith(HTTP) ? HttpGetRequester
 				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
-				: JMIO.getStringFromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
+				: JMResources
+						.getStringFromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
 	}
 
 	public static String getStringfromRestOrClasspathOrFilePath(
 			String resourceInRestUrlOrClasspathOrFilePath) {
 		return resourceInRestUrlOrClasspathOrFilePath.startsWith(HTTP) ? HttpGetRequester
 				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
-				: JMIO.getStringFromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
+				: JMResources
+						.getStringFromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
 	}
 
 	public static List<String> readLinesfromRestOrClasspathOrFilePath(

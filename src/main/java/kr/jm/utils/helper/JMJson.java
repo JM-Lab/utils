@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.InputStream;
 
 import kr.jm.utils.exception.JMExceptionManager;
-import kr.jm.utils.io.JMFileIO;
-import kr.jm.utils.io.JMIO;
-import kr.jm.utils.io.JMResources;
 import lombok.extern.slf4j.Slf4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,7 +35,7 @@ public class JMJson {
 	}
 
 	public static String toJsonString(File jsonFile) {
-		return JMFileIO.readString(jsonFile);
+		return JMFile.readString(jsonFile);
 	}
 
 	public static File toJsonFile(String jsonString, File returnJsonFile) {
@@ -230,7 +227,8 @@ public class JMJson {
 	public static <T> T fromClasspathOrFilePath(
 			String resourceInClasspathOrFilePath, TypeReference<T> typeReference) {
 		return fromJsonString(
-				JMIO.getStringFromClasspathOrFilePath(resourceInClasspathOrFilePath),
+				JMResources
+						.getStringFromClasspathOrFilePath(resourceInClasspathOrFilePath),
 				typeReference);
 	}
 

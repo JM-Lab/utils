@@ -1,9 +1,9 @@
 package kr.jm.utils;
 
 import kr.jm.utils.exception.JMExceptionManager;
+import kr.jm.utils.helper.JMIO;
 import kr.jm.utils.helper.JMJson;
 import kr.jm.utils.helper.JMString;
-import kr.jm.utils.io.JMIO;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.http.HttpEntity;
