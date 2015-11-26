@@ -1,11 +1,5 @@
 package kr.jm.utils;
 
-import kr.jm.utils.exception.JMExceptionManager;
-import kr.jm.utils.helper.JMIO;
-import kr.jm.utils.helper.JMJson;
-import kr.jm.utils.helper.JMString;
-import lombok.extern.slf4j.Slf4j;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +8,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import kr.jm.utils.exception.JMExceptionManager;
+import kr.jm.utils.helper.JMIO;
+import kr.jm.utils.helper.JMJson;
+import kr.jm.utils.helper.JMString;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HttpGetRequester {
@@ -25,7 +25,7 @@ public class HttpGetRequester {
 					typeReference);
 		} catch (Exception e) {
 			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
-					"getRestApiResponseAsObject");
+					"getRestApiResponseAsObject", url, typeReference);
 		}
 	}
 
@@ -34,7 +34,7 @@ public class HttpGetRequester {
 			return getResponseAsStringThrowsEx(url);
 		} catch (Exception e) {
 			return JMExceptionManager.handleExceptionAndReturnNull(log, e,
-					"getResponseAsString");
+					"getResponseAsString", url);
 		}
 	}
 
@@ -46,10 +46,10 @@ public class HttpGetRequester {
 		try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
 			HttpEntity entity = response.getEntity();
 			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new IllegalStateException(response.getStatusLine()
-						.getStatusCode()
-						+ JMString.SPACE
-						+ response.getStatusLine().getReasonPhrase());
+				throw new IllegalStateException(
+						response.getStatusLine().getStatusCode()
+								+ JMString.SPACE
+								+ response.getStatusLine().getReasonPhrase());
 			} else {
 				responseString = JMIO.toString(entity.getContent());
 			}
