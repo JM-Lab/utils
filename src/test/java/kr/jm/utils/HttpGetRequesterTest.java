@@ -13,7 +13,8 @@ public class HttpGetRequesterTest {
 
 	@Test
 	public void testGetResponseAsString() {
-		String url = "http://aws.amazon.com/ec2/pricing/pricing-on-demand-instances.json";
+		String url =
+				"http://aws.amazon.com/ec2/pricing/pricing-on-demand-instances.json";
 		String jsonString = HttpGetRequester.getResponseAsString(url);
 		System.out.println(jsonString);
 		assertTrue(url != null);

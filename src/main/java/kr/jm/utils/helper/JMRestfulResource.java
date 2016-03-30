@@ -10,24 +10,27 @@ public class JMRestfulResource {
 
 	public static String getStringfromRestOrClasspathOrFilePath(
 			String resourceInRestUrlOrClasspathOrFilePath, String encoding) {
-		return resourceInRestUrlOrClasspathOrFilePath.startsWith(HTTP) ? HttpGetRequester
-				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
-				: JMResources
-						.getStringFromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
+		return resourceInRestUrlOrClasspathOrFilePath.startsWith(HTTP)
+				? HttpGetRequester.getResponseAsString(
+						resourceInRestUrlOrClasspathOrFilePath)
+				: JMResources.getStringFromClasspathOrFilePath(
+						resourceInRestUrlOrClasspathOrFilePath);
 	}
 
 	public static String getStringfromRestOrClasspathOrFilePath(
 			String resourceInRestUrlOrClasspathOrFilePath) {
-		return resourceInRestUrlOrClasspathOrFilePath.startsWith(HTTP) ? HttpGetRequester
-				.getResponseAsString(resourceInRestUrlOrClasspathOrFilePath)
-				: JMResources
-						.getStringFromClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath);
+		return resourceInRestUrlOrClasspathOrFilePath.startsWith(HTTP)
+				? HttpGetRequester.getResponseAsString(
+						resourceInRestUrlOrClasspathOrFilePath)
+				: JMResources.getStringFromClasspathOrFilePath(
+						resourceInRestUrlOrClasspathOrFilePath);
 	}
 
 	public static List<String> readLinesfromRestOrClasspathOrFilePath(
 			String resourceInRestUrlOrClasspathOrFilePath) {
 		return JMCollections
-				.buildListByLine(getStringfromRestOrClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath));
+				.buildListByLine(getStringfromRestOrClasspathOrFilePath(
+						resourceInRestUrlOrClasspathOrFilePath));
 	}
 
 }

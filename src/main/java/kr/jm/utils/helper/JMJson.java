@@ -3,13 +3,13 @@ package kr.jm.utils.helper;
 import java.io.File;
 import java.io.InputStream;
 
-import kr.jm.utils.exception.JMExceptionManager;
-import lombok.extern.slf4j.Slf4j;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.jm.utils.exception.JMExceptionManager;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class JMJson {
@@ -48,7 +48,8 @@ public class JMJson {
 		}
 	}
 
-	public static File toJsonFileOrNull(String jsonString, File returnJsonFile) {
+	public static File toJsonFileOrNull(String jsonString,
+			File returnJsonFile) {
 		try {
 			jsonMapper.writeValue(returnJsonFile, jsonString);
 			return returnJsonFile;
@@ -77,7 +78,8 @@ public class JMJson {
 		}
 	}
 
-	public static <T> T fromBytes(byte[] bytes, TypeReference<T> typeReference) {
+	public static <T> T fromBytes(byte[] bytes,
+			TypeReference<T> typeReference) {
 		try {
 			return jsonMapper.readValue(bytes, typeReference);
 		} catch (Exception e) {
@@ -185,7 +187,8 @@ public class JMJson {
 		}
 	}
 
-	public static <T> T fromJsonInputStream(InputStream inputStream, Class<T> c) {
+	public static <T> T fromJsonInputStream(InputStream inputStream,
+			Class<T> c) {
 		try {
 			return jsonMapper.readValue(inputStream, c);
 		} catch (Exception e) {
@@ -210,7 +213,8 @@ public class JMJson {
 				typeReference);
 	}
 
-	public static <T> T fromJsonResource(String resourceInClasspath, Class<T> c) {
+	public static <T> T fromJsonResource(String resourceInClasspath,
+			Class<T> c) {
 		return fromJsonInputStream(
 				JMResources.getResourceInputStream(resourceInClasspath), c);
 	}
@@ -219,17 +223,16 @@ public class JMJson {
 			String resourceInRestUrlOrClasspathOrFilePath,
 			TypeReference<T> typeReference) {
 		return fromJsonString(
-				JMRestfulResource
-						.getStringfromRestOrClasspathOrFilePath(resourceInRestUrlOrClasspathOrFilePath),
+				JMRestfulResource.getStringfromRestOrClasspathOrFilePath(
+						resourceInRestUrlOrClasspathOrFilePath),
 				typeReference);
 	}
 
 	public static <T> T fromClasspathOrFilePath(
-			String resourceInClasspathOrFilePath, TypeReference<T> typeReference) {
-		return fromJsonString(
-				JMResources
-						.getStringFromClasspathOrFilePath(resourceInClasspathOrFilePath),
-				typeReference);
+			String resourceInClasspathOrFilePath,
+			TypeReference<T> typeReference) {
+		return fromJsonString(JMResources.getStringFromClasspathOrFilePath(
+				resourceInClasspathOrFilePath), typeReference);
 	}
 
 }
