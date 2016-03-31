@@ -11,16 +11,21 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import kr.jm.utils.helper.JMJson;
 import kr.jm.utils.helper.JMOptional;
 import kr.jm.utils.helper.JMRestfulResource;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 public class RestfulResourceUpdater<T> {
 
 	private String restfulResourceUrl;
-	private String jsonStringCache;
 	private TypeReference<T> type;
+	private String jsonStringCache;
+
+	public RestfulResourceUpdater(String restfulResourceUrl,
+			TypeReference<T> type) {
+		super();
+		this.restfulResourceUrl = restfulResourceUrl;
+		this.type = type;
+	}
 
 	public Optional<T> updateResource() {
 		return JMOptional
@@ -39,5 +44,4 @@ public class RestfulResourceUpdater<T> {
 	private void setJsonStringCache(String jsonStringCache) {
 		this.jsonStringCache = jsonStringCache;
 	}
-
 }
