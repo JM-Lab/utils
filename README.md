@@ -1,7 +1,7 @@
 JMLab Java Utility Libraries
 ============================
 ## version
-	0.8.1
+	0.8.2
 
 ## Prerequisites:
 * Java 8 or later
@@ -13,6 +13,7 @@ Checkout the source code:
 
     git clone https://github.com/JM-Lab/utils.git
     cd utils
+    git checkout -b 0.8.2 origin/0.8.2 
     mvn install
 
 ## Usage
@@ -22,6 +23,6 @@ Set up pom.xml :
     <dependency>
 			<groupId>jmlab</groupId>
 			<artifactId>jmlab-utils</artifactId>
-			<version>0.8.1</version>
+			<version>0.8.2</version>
 	</dependency>
     (...)
