@@ -18,7 +18,8 @@ public class RestfulResourceUpdater<T> {
 
 	private String restfulResourceUrl;
 	private TypeReference<T> type;
-	private String jsonStringCache;
+	private String cachedJsonString;
+	private T cachedResource;
 
 	public RestfulResourceUpdater(String restfulResourceUrl,
 			TypeReference<T> type) {
@@ -32,9 +33,10 @@ public class RestfulResourceUpdater<T> {
 				.getOptional(JMRestfulResource
 						.getStringfromRestOrClasspathOrFilePath(
 								restfulResourceUrl))
-				.filter(getEquals(jsonStringCache).negate())
+				.filter(getEquals(cachedJsonString).negate())
 				.filter(peek(this::setJsonStringCache))
-				.map(jsonString -> JMJson.fromJsonString(jsonString, type));
+				.map(jsonString -> JMJson.fromJsonString(jsonString, type))
+				.filter(peek(resource -> this.cachedResource = resource));
 	}
 
 	public void updateResource(Consumer<T> updateConsumer) {
@@ -42,6 +44,6 @@ public class RestfulResourceUpdater<T> {
 	}
 
 	private void setJsonStringCache(String jsonStringCache) {
-		this.jsonStringCache = jsonStringCache;
+		this.cachedJsonString = jsonStringCache;
 	}
 }
