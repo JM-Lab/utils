@@ -15,9 +15,23 @@ import kr.jm.utils.helper.JMJson;
 import kr.jm.utils.helper.JMString;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Class HttpGetRequester.
+ */
 @Slf4j
 public class HttpGetRequester {
 
+	/**
+	 * Gets the rest api response as object.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param url
+	 *            the url
+	 * @param typeReference
+	 *            the type reference
+	 * @return the rest api response as object
+	 */
 	public static <T> T getRestApiResponseAsObject(String url,
 			TypeReference<T> typeReference) {
 		try {
@@ -29,6 +43,13 @@ public class HttpGetRequester {
 		}
 	}
 
+	/**
+	 * Gets the response as string.
+	 *
+	 * @param url
+	 *            the url
+	 * @return the response as string
+	 */
 	public static String getResponseAsString(String url) {
 		try {
 			return getResponseAsStringThrowsEx(url);

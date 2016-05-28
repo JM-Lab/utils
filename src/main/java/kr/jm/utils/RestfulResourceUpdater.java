@@ -13,6 +13,11 @@ import kr.jm.utils.helper.JMOptional;
 import kr.jm.utils.helper.JMRestfulResource;
 import lombok.Getter;
 
+/**
+ * Gets the cached resource.
+ *
+ * @return the cached resource
+ */
 @Getter
 public class RestfulResourceUpdater<T> {
 
@@ -21,6 +26,14 @@ public class RestfulResourceUpdater<T> {
 	private String cachedJsonString;
 	private T cachedResource;
 
+	/**
+	 * Instantiates a new restful resource updater.
+	 *
+	 * @param restfulResourceUrl
+	 *            the restful resource url
+	 * @param type
+	 *            the type
+	 */
 	public RestfulResourceUpdater(String restfulResourceUrl,
 			TypeReference<T> type) {
 		super();
@@ -28,6 +41,11 @@ public class RestfulResourceUpdater<T> {
 		this.type = type;
 	}
 
+	/**
+	 * Update resource.
+	 *
+	 * @return the optional
+	 */
 	public Optional<T> updateResource() {
 		return JMOptional
 				.getOptional(JMRestfulResource
@@ -39,6 +57,12 @@ public class RestfulResourceUpdater<T> {
 				.filter(peek(resource -> this.cachedResource = resource));
 	}
 
+	/**
+	 * Update resource.
+	 *
+	 * @param updateConsumer
+	 *            the update consumer
+	 */
 	public void updateResource(Consumer<T> updateConsumer) {
 		updateResource().ifPresent(updateConsumer);
 	}

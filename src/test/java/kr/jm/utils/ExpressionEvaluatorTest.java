@@ -3,6 +3,9 @@ package kr.jm.utils;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The Class ExpressionEvaluatorTest.
+ */
 public class ExpressionEvaluatorTest {
 
 	String expression1 = "30000000000000000l==30000000000000000l";
@@ -17,11 +20,20 @@ public class ExpressionEvaluatorTest {
 
 	ExpressionEvaluator expressionEvaluator;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		expressionEvaluator = new ExpressionEvaluator();
 	}
 
+	/**
+	 * Test.
+	 */
 	@Test
 	public void test() {
 		System.out
