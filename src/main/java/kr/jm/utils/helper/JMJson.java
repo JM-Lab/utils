@@ -2,6 +2,7 @@ package kr.jm.utils.helper;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -521,6 +522,21 @@ public class JMJson {
 			TypeReference<T> typeReference) {
 		return fromJsonString(JMResources.getStringFromClasspathOrFilePath(
 				resourceInClasspathOrFilePath), typeReference);
+	}
+
+	/**
+	 * Convert map.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param pojoBean
+	 *            the pojo bean
+	 * @return the hash map
+	 */
+	public static <T> HashMap<String, Object> convertMap(T pojoBean) {
+		return jsonMapper.convertValue(pojoBean,
+				new TypeReference<HashMap<String, Object>>() {
+				});
 	}
 
 }
