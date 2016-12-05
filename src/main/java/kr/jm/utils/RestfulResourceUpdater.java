@@ -14,9 +14,10 @@ import kr.jm.utils.helper.JMRestfulResource;
 import lombok.Getter;
 
 /**
- * Gets the cached resource.
+ * The Class RestfulResourceUpdater.
  *
- * @return the cached resource
+ * @param <T>
+ *            the generic type
  */
 @Getter
 public class RestfulResourceUpdater<T> {
@@ -47,10 +48,8 @@ public class RestfulResourceUpdater<T> {
 	 * @return the optional
 	 */
 	public Optional<T> updateResource() {
-		return JMOptional
-				.getOptional(JMRestfulResource
-						.getStringfromRestOrClasspathOrFilePath(
-								restfulResourceUrl))
+		return JMOptional.getOptional(JMRestfulResource
+				.getStringfromRestOrClasspathOrFilePath(restfulResourceUrl))
 				.filter(getEquals(cachedJsonString).negate())
 				.filter(peek(this::setJsonStringCache))
 				.map(jsonString -> JMJson.fromJsonString(jsonString, type))

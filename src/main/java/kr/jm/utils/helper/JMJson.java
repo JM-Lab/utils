@@ -19,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class JMJson {
 
 	private static ObjectMapper jsonMapper = new ObjectMapper()
-			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+			.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
 
 	/**
 	 * To json string.
