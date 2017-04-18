@@ -29,7 +29,7 @@ public class HttpGetRequesterTest {
 				"http://aws.amazon.com/ec2/pricing/pricing-on-demand-instances.json";
 		String jsonString = HttpGetRequester.getResponseAsString(url);
 		System.out.println(jsonString);
-		assertTrue(url != null);
+		assertTrue(jsonString != null);
 	}
 
 }

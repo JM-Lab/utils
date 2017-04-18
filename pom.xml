@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.jm-lab</groupId>
 	<artifactId>jmlab-utils</artifactId>
-	<version>0.8.7</version>
+	<version>0.8.8</version>
 	<name>JMLab-Utils</name>
 	<description>Java Utility Libraries</description>
 	<url>https://github.com/JM-Lab/utils</url>
@@ -36,29 +36,30 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+			<version>4.5.3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.8.6</version>
+			<version>2.8.8</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>4.3.5.RELEASE</version>
+			<version>4.3.7.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>kr.jmlab</groupId>
 			<artifactId>jmlab-utils-java8</artifactId>
-			<version>0.1.85</version>
+			<version>0.1.86</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.14</version>
+			<version>1.16.16</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
